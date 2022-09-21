@@ -12,4 +12,8 @@ NOTE: This JavaScript modules's actual file name is qworum-for-web-pages.mjs, no
 
 Qworum is the _Service Web_ that enables distributed web applications. See the [Qworum website](https://qworum.net).
 
+## What is the URL of the code repository for Qworum's browser extension?
+
+The Qworum browser extension is closed source at this time.
+
 ∎
