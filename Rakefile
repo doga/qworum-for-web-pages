@@ -16,5 +16,7 @@ task :docs do
   # jsdoc needs a .js file not .mjs, so make a copy
   tmpfile = 'tmp/qworum-for-web-pages.js'
   cp 'qworum-for-web-pages.mjs', tmpfile
+
+  # generate the documentation
   sh "jsdoc #{tmpfile} -d docs --readme README.md"
 end
