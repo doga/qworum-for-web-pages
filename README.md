@@ -17,6 +17,4 @@ Qworum is the _Service Web_ that enables distributed web applications. See the [
 
 ## What is the URL of the code repository for Qworum's browser extension?
 
-The Qworum browser extension is closed source at this time.
-
-∎
+The Qworum browser extension is closed source at this time ∎
