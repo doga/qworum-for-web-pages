@@ -1739,11 +1739,12 @@ class Goto extends Instruction {
     static tag = "goto";
     _href = null;
     _parameters = [];
-    static build(href, parameters) {
-        return new Goto(href, parameters);
+    static build(href) {
+        return new Goto(href);
     }
-    constructor(href, parameters){
+    constructor(href){
         super();
+        const parameters = [];
         if (typeof href === 'string') this._href = href;
         if (!parameters) return;
         const params = parameters instanceof Array ? parameters : [
@@ -1828,7 +1829,7 @@ class Goto extends Instruction {
                     nsStack.pop();
                 }
             }
-            result = new Goto(href, parameters);
+            result = new Goto(href);
         } catch (error2) {
             errorMessage = `${error2}`;
         } finally{
@@ -1863,10 +1864,7 @@ class Goto extends Instruction {
     }
     static fromIndexedDb(encoded) {
         if (encoded.type !== this.tag) throw new Error(`not a ${this.tag}`);
-        return new Goto(encoded.value.href, encoded.value.parameters.map((parameter)=>({
-                name: parameter.name,
-                value: Instruction.statementFromIndexedDb(parameter.value)
-            })));
+        return new Goto(encoded.value.href);
     }
     toIndexedDb() {
         return {
@@ -1888,11 +1886,12 @@ class Call extends Instruction {
     _parameters = [];
     _objectParameters = [];
     _sendParameters = false;
-    static build(object, href, parameters, sendParameters, objectParameters) {
-        return new Call(object, href, parameters, sendParameters, objectParameters);
+    static build(object, href, parameters, objectParameters) {
+        return new Call(object, href, parameters, objectParameters);
     }
-    constructor(object, href, parameters, sendParameters, objectParameters){
+    constructor(object, href, parameters, objectParameters){
         super();
+        const sendParameters = false;
         const o = object === null || typeof object === 'undefined' ? [
             '@'
         ] : object instanceof Array ? object : [
@@ -1922,7 +1921,7 @@ class Call extends Instruction {
                 this._parameters.push(value1);
             }
         }
-        if (!(sendParameters === null || typeof sendParameters === 'undefined')) {
+        if (!(false === null || typeof false === 'undefined')) {
             this._sendParameters = sendParameters;
         }
     }
@@ -2075,7 +2074,7 @@ class Call extends Instruction {
                     nsStack.pop();
                 }
             }
-            result = new Call(object, href, parameters, sendParameters, objectParameters);
+            result = new Call(object, href, parameters, objectParameters);
         } catch (error5) {
             errorMessage = `${error5}`;
         } finally{
@@ -2127,7 +2126,7 @@ class Call extends Instruction {
         return new Call(encoded.value.object, encoded.value.href, encoded.value.parameters.map((parameter)=>({
                 name: parameter.name,
                 value: Instruction.statementFromIndexedDb(parameter.value)
-            })), encoded.value.sendParameters, encoded.value.objectParameters);
+            })), encoded.value.objectParameters);
     }
     toIndexedDb() {
         return {
@@ -2255,13 +2254,15 @@ class PhaseParameters {
         return `PhaseParameters(${result})`;
     }
 }
+
 // export { DataValue as DataValue, GenericData as GenericData, Json as Json, SemanticData as SemanticData };
 // export { Instruction as Instruction, Data as Data, Return as Return, Sequence as Sequence, Goto as Goto, Call as Call, Fault as Fault, Try as Try };
 // export { Script as Script };
 // export { PhaseParameters as PhaseParameters };
-// export const MESSAGE_VERSION = '0.9.5';
+// export const MESSAGE_VERSION = '0.9.6';
 
-const MESSAGE_VERSION = '0.9.5';
+
+const MESSAGE_VERSION = '0.9.6';
 
 // end qworum-messages-*.mjs
 
@@ -2323,20 +2324,21 @@ class Qworum {
    * @param {(string[] | string | null | undefined)} object - The path of the Qworum object to call.
    * @param {(string | null | undefined)} href - The URL of the end-point to call. Can be a relative or absolute URL.
    * @param {(object | object[] | null | undefined)} arguments - Named data value arguments.
-   * @param {boolean} sendArguments - If true, send arguments in the HTTP(S) request's body. Default is false.
    * @param {(object | object[] | null | undefined)} objectArguments - Named Qworum object arguments.
    * @throws {Error}
    * @returns {Qworum.message.Call}
    * @example
    * // Example 1
-   * const call1 = Qworum.Call(
+   * const call1 = Qworum.Call('@', 'home/');
+   * // Example 2
+   * const call2 = Qworum.Call(
    *   '@', 'home/', 
    *   {name: 'current year', value: Qworum.Json(2022)}
    * );
-   * // Example 2
-   * const call2 = Qworum.Call(
+   * // Example 3
+   * const call3 = Qworum.Call(
    *   ['@'], 'home/',
-   *   [{name: 'current year', value: Qworum.Json(2022)}], false,
+   *   [{name: 'current year', value: Qworum.Json(2022)}],
    *   [{name: , object: ['@', 'a Qworum object']}]
    * );
    * @see <https://qworum.net/en/specification/v1/#call>
@@ -2350,13 +2352,11 @@ class Qworum {
    * @function Qworum.Goto
    * @static
    * @param {(string | null | undefined)} href - The URL of the end-point to call. Can be a relative or absolute URL.
-   * @param {(object | object[] | null | undefined)} arguments - Named data value arguments.
    * @throws {Error}
    * @returns {Qworum.message.Goto}
    * @example
    * const goto = Qworum.Goto(
-   *   ['@'], 'home/',
-   *   [{name: 'current year', value: Qworum.Json(2022)}]
+   *   ['@'], 'home/'
    * );
    * @see <https://qworum.net/en/specification/v1/#goto>
    */
