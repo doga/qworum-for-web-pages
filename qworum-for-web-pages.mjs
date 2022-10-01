@@ -2299,7 +2299,7 @@ class Qworum {
    * Implementation version. 
    * @static
    */
-  static version = '0.9.5';
+  static version = '0.9.9';
 
   /** 
    * Qworum message classes. 
