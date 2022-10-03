@@ -8,8 +8,8 @@ NOTE: This JavaScript modules's actual file name is qworum-for-web-pages.mjs, no
 
 See:
 
-- [The documentation](https://qworum.net/en/docs/qworum-for-web-pages/v0.9.1/)
-- [The demo](https://github.com/doga/qworum-demo).
+- [The documentation](https://qworum.net/en/docs/qworum-for-web-pages/latest/)
+- [The demo (GitHub)](https://github.com/doga/qworum-demo).
 
 ## What is Qworum?
 
