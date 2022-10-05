@@ -2553,7 +2553,7 @@ class Qworum {
      * Qworum.setData('current year', Qworum.Json(2022), () => console.log('The write operation was successful.'));
      * @see <https://qworum.net/en/specification/v1/#data>
      */
-    static setData(path, newValue, callback) {
+    static setData(path, newValue, callback) { // TODO replace callbacks with promises?
         this._log(`[setData] `);
         // validate path
         if (typeof path === 'string') path = [path];
@@ -2577,6 +2577,8 @@ class Qworum {
         )
     }
 
+    // TODO add new function: static getMultipleData(paths, callback)?
+
     /**
      * Profile of functions that are callback parameters for Qworum.getData().
      * @callback getDataCallback
@@ -2594,7 +2596,7 @@ class Qworum {
      * Qworum.getData('current year', (json) => console.log(`Year: ${json.value}`));
      * @see <https://qworum.net/en/specification/v1/#data>
      */
-    static getData(path, callback) { // TODO add new function: static getMultipleData(paths, callback)
+    static getData(path, callback) { // TODO replace callbacks with promises?
         this._log(`[getData] `);
         if (typeof path === 'string') path = [path];
         if (!(path instanceof Array && !path.find(e => (typeof e !== 'string')))) throw new Error('invalid path');
