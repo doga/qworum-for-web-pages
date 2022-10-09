@@ -1,6 +1,5 @@
 /**
  * Qworum for web pages. This ES JavaScript library exports the Qworum class.
- * @version 0.9.1
  * @author Doğa Armangil <d.armangil@qworum.net>
  * @license MIT License <https://opensource.org/licenses/MIT>
  * @see <https://qworum.net>
