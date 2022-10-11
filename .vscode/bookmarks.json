@@ -1,0 +1,49 @@
+{
+	"files": [
+		{
+			"path": "qworum-for-web-pages.mjs",
+			"bookmarks": [
+				{
+					"line": 2304,
+					"column": 14,
+					"label": ""
+				},
+				{
+					"line": 2532,
+					"column": 25,
+					"label": ""
+				},
+				{
+					"line": 2563,
+					"column": 46,
+					"label": ""
+				},
+				{
+					"line": 2609,
+					"column": 33,
+					"label": ""
+				},
+				{
+					"line": 2655,
+					"column": 31,
+					"label": ""
+				},
+				{
+					"line": 2747,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 2778,
+					"column": 9,
+					"label": ""
+				},
+				{
+					"line": 2782,
+					"column": 23,
+					"label": "⚠️ UPDATE FOR PROD"
+				}
+			]
+		}
+	]
+}
