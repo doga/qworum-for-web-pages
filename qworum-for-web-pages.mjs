@@ -2515,7 +2515,7 @@ class QworumRuntimeModule {
      * @see <https://qworum.net/en/specification/v1/#data>
      */
     static async setData(path, newValue) {
-        this._log(`[setData] `);
+        Qworum._log(`[setData] `);
         // validate path
         if (typeof path === 'string') path = [path];
         if (!(path instanceof Array && !path.find(e => (typeof e !== 'string')))) {
@@ -2529,7 +2529,7 @@ class QworumRuntimeModule {
 
         try {
             const response = await Qworum._sendMessage({ 
-                type: '[Web page API v1] set data', path, value: newValue.toIndexedDb() 
+                type: '[Runtime API v1] set data', path, value: newValue.toIndexedDb() 
             });
 
             if (response.status !== 200) {
@@ -2561,14 +2561,14 @@ class QworumRuntimeModule {
      * @see <https://qworum.net/en/specification/v1/#data>
      */
     static async getData(path) { // TODO replace callbacks with promises?
-        this._log(`[getData] `);
+        Qworum._log(`[getData] `);
         if (typeof path === 'string') path = [path];
         if (!(path instanceof Array && !path.find(e => (typeof e !== 'string')))){
             return Promise.reject(new Error('Invalid path'));
         }
 
         try {
-            const response = await Qworum._sendMessage({ type: '[Web page API v1] get data', path });
+            const response = await Qworum._sendMessage({ type: '[Runtime API v1] get data', path });
 
             if (response.status === 404) {
                 return Promise.resolve(null);
@@ -2607,13 +2607,13 @@ class QworumRuntimeModule {
      * @see <https://qworum.net/en/specification/v1/#script>
      */
     static async eval(script) { // TODO send script in JSON format, remove XML library from this module
-        this._log(`[eval] `);
+        Qworum._log(`[eval] `);
         if (!script) return Promise.reject(new Error('Invalid script'));
 
         try {
             const xmlString = script.toXml();
-            this._log(`[eval] script: ${xmlString}`);
-            const msg = await Qworum._sendMessage({ type: '[Web page API v1] eval xml script', script: xmlString });
+            Qworum._log(`[eval] script: ${xmlString}`);
+            const msg = await Qworum._sendMessage({ type: '[Runtime API v1] eval xml script', script: xmlString });
 
             Qworum._log(`[eval] received: ${JSON.stringify(msg)}`);
             if (msg.status !== 200) return Promise.reject(new Error('Internal error occurred'));
@@ -2722,7 +2722,7 @@ class Qworum {
     static init() {
         // TODO remove this when the extension's content script can do window.history.forward() reliably
         Qworum._sendMessage(
-            { type: '[Web page API v1] in session?' },
+            { type: '[Runtime API v1] in session?' },
             function (response) {
                 if (!response.inSession) return;
                 window.history.forward();
@@ -2746,7 +2746,7 @@ class Qworum {
      */
     static async ping() {
         try {
-            const response = await Qworum._sendMessage({ type: '[Web page API v1] ping' });
+            const response = await Qworum._sendMessage({ type: '[Browser extension API v1] ping' });
 
             if (response.status !== 200) {
                 return Promise.reject(new Error('Internal error'));
@@ -2761,8 +2761,8 @@ class Qworum {
 
     static _sendMessage(message) {
         const browserExtensionInfo = Qworum.getBrowserExtensionInfo();
-        this._log(`Detected browser type: ${browserExtensionInfo.browserType}`);
-        this._log(`to Qworum extension's service worker: ${JSON.stringify(message)}`);
+        Qworum._log(`Detected browser type: ${browserExtensionInfo.browserType}`);
+        Qworum._log(`to Qworum extension's service worker: ${JSON.stringify(message)}`);
 
         return new Promise((resolve, reject) => {
             try {
@@ -2782,7 +2782,7 @@ class Qworum {
                     reject(new Error('Unsupported browser.')); return;
                 }
             } catch (error) {
-                this._log('The Qworum extension is not installed or is disabled.');
+                Qworum._log('The Qworum extension is not installed or is disabled.');
                 reject(new Error(`${error}`));
             }
         });
@@ -2815,11 +2815,12 @@ class Qworum {
             browserExtensionInfo = { browserType, extensionId: browserExtensionIds[browserType] };
         }
         if (!browserExtensionInfo) throw new Error('[Qworum for web pages] Browser not supported by Qworum.');
+        Qworum._log(`extension id: ${JSON.stringify(browserExtensionInfo)}`);
         return browserExtensionInfo;
     }
 
     static _log(message) {
-        //    console.log(`[Qworum for web pages] ${message}`);
+        console.log(`[Qworum for web pages] ${message}`);
     }
 }
 
