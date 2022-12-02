@@ -19,4 +19,6 @@ Sample frontend projects that show how this library is used:
 - [Demo that uses JSON as its data format](https://github.com/doga/qworum-demo).
 - [Demo that uses RDF-based semantic data formats such as JSON-LD and N-Quads](https://github.com/doga/qworum-demo-semantic).
 
-∎
+## License
+
+[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) ∎
