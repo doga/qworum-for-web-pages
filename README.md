@@ -1,20 +1,22 @@
 # Qworum for web pages
 
-With this JavaScript ES module, websites can use the advanced browser functionality that is provided by the Qworum browser extension.
+Qworum JavaScript library for use inside web pages on web browsers.
+Qworum is the _Service Web_ that enables distributed web applications. See the [Qworum website](https://qworum.net).
 
-NOTE: This JavaScript modules's actual file name is qworum-for-web-pages.mjs, not `qworum-for-web-pages.js` as you will see in the documentation.
+With this library web pages can:
+
+1. verify that the Qworum extension is installed and enabled on the end-user's browser.
+1. use Qworum's capabilities by communicating with the Qworum browser extension.
 
 ## Usage
 
-See:
+1. First, copy and paste [qworum-for-web-pages.mjs](https://github.com/doga/qworum-for-web-pages/blob/master/qworum-for-web-pages.mjs) into your web frontend project directory.
+1. Then create a JavaScript file for your web frontend project and link it to your web page like this: `<script type="module" src="./path/to/your.js"></script>`. [Example](https://github.com/doga/qworum-demo/blob/master/src/websites/shop.demo.qworum.net/home/index.html).
+1. After that, import the Qworum library like this in _your.js_: `import { Qworum } from "./path/to/qworum-for-web-pages.mjs";`. [Example](https://github.com/doga/qworum-demo/blob/master/src/websites/shop.demo.qworum.net/_assets/js/home.js).
 
-- [The documentation](https://qworum.net/en/docs/qworum-for-web-pages/latest/)
-- [The demo (GitHub)](https://github.com/doga/qworum-demo).
+Sample frontend projects that show how this library is used:
 
-## What is Qworum?
+- [Demo that uses JSON as its data format](https://github.com/doga/qworum-demo).
+- [Demo that uses RDF-based semantic data formats such as JSON-LD and N-Quads](https://github.com/doga/qworum-demo-semantic).
 
-Qworum is the _Service Web_ that enables distributed web applications. See the [Qworum website](https://qworum.net).
-
-## What is the URL of the code repository for Qworum's browser extension?
-
-The Qworum browser extension is closed source at this time ∎
+∎

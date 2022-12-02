@@ -1,8 +1,91 @@
-/**
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      qworum-for-web-pages.mjs - Documentation
+  </title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+  
+
+  
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <svg fill="#6D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      SDK Client Reference
+    </h3>
+
+    
+
+    <h3>Classes</h3><ul><li id="Qworum-nav"><a href="Qworum.html">Qworum</a><ul class='methods'><li data-type="method" id="Qworum-ping-nav"><a href="Qworum.html#.ping">ping</a></li></ul></li><li id="QworumRuntimeModule-nav"><a href="QworumRuntimeModule.html">QworumRuntimeModule</a><ul class='methods'><li data-type="method" id="QworumRuntimeModule-Call-nav"><a href="QworumRuntimeModule.html#.Call">Call</a></li><li data-type="method" id="QworumRuntimeModule-Data-nav"><a href="QworumRuntimeModule.html#.Data">Data</a></li><li data-type="method" id="QworumRuntimeModule-eval-nav"><a href="QworumRuntimeModule.html#.eval">eval</a></li><li data-type="method" id="QworumRuntimeModule-Fault-nav"><a href="QworumRuntimeModule.html#.Fault">Fault</a></li><li data-type="method" id="QworumRuntimeModule-getData-nav"><a href="QworumRuntimeModule.html#.getData">getData</a></li><li data-type="method" id="QworumRuntimeModule-Goto-nav"><a href="QworumRuntimeModule.html#.Goto">Goto</a></li><li data-type="method" id="QworumRuntimeModule-Json-nav"><a href="QworumRuntimeModule.html#.Json">Json</a></li><li data-type="method" id="QworumRuntimeModule-Return-nav"><a href="QworumRuntimeModule.html#.Return">Return</a></li><li data-type="method" id="QworumRuntimeModule-Script-nav"><a href="QworumRuntimeModule.html#.Script">Script</a></li><li data-type="method" id="QworumRuntimeModule-SemanticData-nav"><a href="QworumRuntimeModule.html#.SemanticData">SemanticData</a></li><li data-type="method" id="QworumRuntimeModule-Sequence-nav"><a href="QworumRuntimeModule.html#.Sequence">Sequence</a></li><li data-type="method" id="QworumRuntimeModule-setData-nav"><a href="QworumRuntimeModule.html#.setData">setData</a></li><li data-type="method" id="QworumRuntimeModule-Try-nav"><a href="QworumRuntimeModule.html#.Try">Try</a></li></ul></li></ul>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        qworum-for-web-pages.mjs
+      </h1>
+    
+
+    
+      
+
+<section>
+  <article>
+    <pre class="prettyprint source linenums"><code>/**
  * Qworum for web pages. This ES JavaScript library exports the Qworum class.
- * @author Doğa Armangil <d.armangil@qworum.net>
- * @license MIT License <https://opensource.org/licenses/MIT>
- * @see <https://qworum.net>
+ * @author Doğa Armangil &lt;d.armangil@qworum.net>
+ * @license MIT License &lt;https://opensource.org/licenses/MIT>
+ * @see &lt;https://qworum.net>
  */
 
 // Cross-browser JavaScript module for web pages.
@@ -84,10 +167,10 @@ class GenericData extends DataValue {
 'use strict';
 const syntax = Object.create(null);
 const predefinedEntities = Object.freeze(Object.assign(Object.create(null), {
-    amp: '&',
+    amp: '&amp;',
     apos: "'",
     gt: '>',
-    lt: '<',
+    lt: '&lt;',
     quot: '"'
 }));
 syntax['predefinedEntities'] = predefinedEntities;
@@ -96,12 +179,12 @@ function isNameChar(__char) {
         return true;
     }
     let cp = getCodePoint(__char);
-    return cp === 0x2D || cp === 0x2E || cp >= 0x30 && cp <= 0x39 || cp === 0xB7 || cp >= 0x300 && cp <= 0x36F || cp >= 0x203F && cp <= 0x2040;
+    return cp === 0x2D || cp === 0x2E || cp >= 0x30 &amp;&amp; cp &lt;= 0x39 || cp === 0xB7 || cp >= 0x300 &amp;&amp; cp &lt;= 0x36F || cp >= 0x203F &amp;&amp; cp &lt;= 0x2040;
 }
 syntax['isNameChar'] = isNameChar;
 function isNameStartChar(__char) {
     let cp = getCodePoint(__char);
-    return cp === 0x3A || cp === 0x5F || cp >= 0x41 && cp <= 0x5A || cp >= 0x61 && cp <= 0x7A || cp >= 0xC0 && cp <= 0xD6 || cp >= 0xD8 && cp <= 0xF6 || cp >= 0xF8 && cp <= 0x2FF || cp >= 0x370 && cp <= 0x37D || cp >= 0x37F && cp <= 0x1FFF || cp >= 0x200C && cp <= 0x200D || cp >= 0x2070 && cp <= 0x218F || cp >= 0x2C00 && cp <= 0x2FEF || cp >= 0x3001 && cp <= 0xD7FF || cp >= 0xF900 && cp <= 0xFDCF || cp >= 0xFDF0 && cp <= 0xFFFD || cp >= 0x10000 && cp <= 0xEFFFF;
+    return cp === 0x3A || cp === 0x5F || cp >= 0x41 &amp;&amp; cp &lt;= 0x5A || cp >= 0x61 &amp;&amp; cp &lt;= 0x7A || cp >= 0xC0 &amp;&amp; cp &lt;= 0xD6 || cp >= 0xD8 &amp;&amp; cp &lt;= 0xF6 || cp >= 0xF8 &amp;&amp; cp &lt;= 0x2FF || cp >= 0x370 &amp;&amp; cp &lt;= 0x37D || cp >= 0x37F &amp;&amp; cp &lt;= 0x1FFF || cp >= 0x200C &amp;&amp; cp &lt;= 0x200D || cp >= 0x2070 &amp;&amp; cp &lt;= 0x218F || cp >= 0x2C00 &amp;&amp; cp &lt;= 0x2FEF || cp >= 0x3001 &amp;&amp; cp &lt;= 0xD7FF || cp >= 0xF900 &amp;&amp; cp &lt;= 0xFDCF || cp >= 0xFDF0 &amp;&amp; cp &lt;= 0xFFFD || cp >= 0x10000 &amp;&amp; cp &lt;= 0xEFFFF;
 }
 syntax['isNameStartChar'] = isNameStartChar;
 function isNotXmlChar(__char) {
@@ -119,7 +202,7 @@ function isWhitespace(__char) {
 syntax['isWhitespace'] = isWhitespace;
 function isXmlChar(__char) {
     let cp = getCodePoint(__char);
-    return cp === 0x9 || cp === 0xA || cp === 0xD || cp >= 0x20 && cp <= 0xD7FF || cp >= 0xE000 && cp <= 0xFFFD || cp >= 0x10000 && cp <= 0x10FFFF;
+    return cp === 0x9 || cp === 0xA || cp === 0xD || cp >= 0x20 &amp;&amp; cp &lt;= 0xD7FF || cp >= 0xE000 &amp;&amp; cp &lt;= 0xFFFD || cp >= 0x10000 &amp;&amp; cp &lt;= 0x10FFFF;
 }
 syntax['isXmlChar'] = isXmlChar;
 function getCodePoint(__char) {
@@ -138,11 +221,11 @@ class StringScanner {
         this.string = string;
         let { chars , charCount , charsToBytes  } = this;
         if (charCount === string.length) {
-            for(let i = 0; i < charCount; ++i){
+            for(let i = 0; i &lt; charCount; ++i){
                 charsToBytes[i] = i;
             }
         } else {
-            for(let byteIndex = 0, charIndex = 0; charIndex < charCount; ++charIndex){
+            for(let byteIndex = 0, charIndex = 0; charIndex &lt; charCount; ++charIndex){
                 charsToBytes[charIndex] = byteIndex;
                 byteIndex += chars[charIndex].length;
             }
@@ -154,7 +237,7 @@ class StringScanner {
     }
     _charLength(string) {
         let { length  } = string;
-        if (length < 2 || !this.multiByteMode) {
+        if (length &lt; 2 || !this.multiByteMode) {
             return length;
         }
         return string.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '_').length;
@@ -182,7 +265,7 @@ class StringScanner {
     }
     consumeMatchFn(fn) {
         let startIndex = this.charIndex;
-        while(!this.isEnd && fn(this.peek())){
+        while(!this.isEnd &amp;&amp; fn(this.peek())){
             this.advance();
         }
         return this.charIndex > startIndex ? this.string.slice(this.charsToBytes[startIndex], this.charsToBytes[this.charIndex]) : emptyString;
@@ -196,7 +279,7 @@ class StringScanner {
         }
         let { length  } = stringToConsume;
         let charLengthToMatch = this._charLength(stringToConsume);
-        if (charLengthToMatch !== length && stringToConsume === this.peek(charLengthToMatch)) {
+        if (charLengthToMatch !== length &amp;&amp; stringToConsume === this.peek(charLengthToMatch)) {
             this.advance(charLengthToMatch);
             return stringToConsume;
         }
@@ -234,7 +317,7 @@ class StringScanner {
         let { charIndex , charsToBytes , string  } = this;
         let byteIndex = charsToBytes[charIndex];
         let matchByteIndex = string.indexOf(searchString, byteIndex);
-        if (matchByteIndex <= 0) {
+        if (matchByteIndex &lt;= 0) {
             return emptyString;
         }
         let result = string.slice(byteIndex, matchByteIndex);
@@ -266,7 +349,7 @@ class XmlNode {
         return this.parent ? this.parent === this.document : false;
     }
     get preserveWhitespace() {
-        return Boolean(this.parent && this.parent.preserveWhitespace);
+        return Boolean(this.parent &amp;&amp; this.parent.preserveWhitespace);
     }
     get type() {
         return '';
@@ -429,14 +512,14 @@ class Parser {
     consumeAttributeValue() {
         let { scanner  } = this;
         let quote = scanner.peek();
-        if (quote !== '"' && quote !== "'") {
+        if (quote !== '"' &amp;&amp; quote !== "'") {
             return false;
         }
         scanner.advance();
         let chars;
         let isClosed = false;
         let value = emptyString;
-        let regex = quote === '"' ? /[^"&<]+/y : /[^'&<]+/y;
+        let regex = quote === '"' ? /[^"&amp;&lt;]+/y : /[^'&amp;&lt;]+/y;
         matchLoop: while(!scanner.isEnd){
             chars = scanner.consumeMatch(regex);
             if (chars) {
@@ -448,11 +531,11 @@ class Parser {
                 case quote:
                     isClosed = true;
                     break matchLoop;
-                case '&':
+                case '&amp;':
                     value += this.consumeReference();
                     continue;
-                case '<':
-                    this.error('Unescaped `<` is not allowed in an attribute value');
+                case '&lt;':
+                    this.error('Unescaped `&lt;` is not allowed in an attribute value');
                     break;
                 case emptyString:
                     this.error('Unclosed attribute');
@@ -467,7 +550,7 @@ class Parser {
     }
     consumeCdataSection() {
         let { scanner  } = this;
-        if (!scanner.consumeStringFast('<![CDATA[')) {
+        if (!scanner.consumeStringFast('&lt;![CDATA[')) {
             return false;
         }
         let text = scanner.consumeUntilString(']]>');
@@ -484,12 +567,12 @@ class Parser {
     }
     consumeCharData() {
         let { scanner  } = this;
-        let charData = scanner.consumeUntilMatch(/<|&|]]>/g);
+        let charData = scanner.consumeUntilMatch(/&lt;|&amp;|]]>/g);
         if (!charData) {
             return false;
         }
         this.validateChars(charData);
-        if (scanner.peek() === ']' && scanner.peek(3) === ']]>') {
+        if (scanner.peek() === ']' &amp;&amp; scanner.peek(3) === ']]>') {
             this.error('Element content may not contain the CDATA section close delimiter `]]>`');
         }
         this.addText(charData);
@@ -497,7 +580,7 @@ class Parser {
     }
     consumeComment() {
         let { scanner  } = this;
-        if (!scanner.consumeStringFast('<!--')) {
+        if (!scanner.consumeStringFast('&lt;!--')) {
             return false;
         }
         let content = scanner.consumeUntilString('--');
@@ -524,7 +607,7 @@ class Parser {
     }
     consumeDoctypeDeclaration() {
         let { scanner  } = this;
-        if (!scanner.consumeStringFast('<!DOCTYPE') || !this.consumeWhitespace()) {
+        if (!scanner.consumeStringFast('&lt;!DOCTYPE') || !this.consumeWhitespace()) {
             return false;
         }
         scanner.consumeMatch(/[^[>]+/y);
@@ -539,7 +622,7 @@ class Parser {
     consumeElement() {
         let { scanner  } = this;
         let mark = scanner.charIndex;
-        if (scanner.peek() !== '<') {
+        if (scanner.peek() !== '&lt;') {
             return false;
         }
         scanner.advance();
@@ -554,14 +637,14 @@ class Parser {
             if (!attrName) {
                 continue;
             }
-            let attrValue = this.consumeEqual() && this.consumeAttributeValue();
+            let attrValue = this.consumeEqual() &amp;&amp; this.consumeAttributeValue();
             if (attrValue === false) {
                 this.error('Attribute value expected');
             }
             if (attrName in attributes) {
                 this.error(`Duplicate attribute: ${attrName}`);
             }
-            if (attrName === 'xml:space' && attrValue !== 'default' && attrValue !== 'preserve') {
+            if (attrName === 'xml:space' &amp;&amp; attrValue !== 'default' &amp;&amp; attrValue !== 'preserve') {
                 this.error('Value of the `xml:space` attribute must be "default" or "preserve"');
             }
             attributes[attrName] = attrValue;
@@ -569,7 +652,7 @@ class Parser {
         if (this.options.sortAttributes) {
             let attrNames = Object.keys(attributes).sort();
             let sortedAttributes = Object.create(null);
-            for(let i = 0; i < attrNames.length; ++i){
+            for(let i = 0; i &lt; attrNames.length; ++i){
                 let attrName1 = attrNames[i];
                 sortedAttributes[attrName1] = attributes[attrName1];
             }
@@ -589,7 +672,7 @@ class Parser {
             }
             let endTagMark = scanner.charIndex;
             let endTagName;
-            if (!scanner.consumeStringFast('</') || !(endTagName = this.consumeName()) || endTagName !== name) {
+            if (!scanner.consumeStringFast('&lt;/') || !(endTagName = this.consumeName()) || endTagName !== name) {
                 scanner.reset(endTagMark);
                 this.error(`Missing end tag for element ${name}`);
             }
@@ -619,7 +702,7 @@ class Parser {
     consumeProcessingInstruction() {
         let { scanner  } = this;
         let mark = scanner.charIndex;
-        if (!scanner.consumeStringFast('<?')) {
+        if (!scanner.consumeStringFast('&lt;?')) {
             return false;
         }
         let name = this.consumeName();
@@ -654,11 +737,11 @@ class Parser {
         if (this.consumeDoctypeDeclaration()) {
             while(this.consumeMisc()){}
         }
-        return mark < scanner.charIndex;
+        return mark &lt; scanner.charIndex;
     }
     consumeReference() {
         let { scanner  } = this;
-        if (scanner.peek() !== '&') {
+        if (scanner.peek() !== '&amp;') {
             return false;
         }
         scanner.advance();
@@ -680,10 +763,10 @@ class Parser {
             parsedValue = syntax.predefinedEntities[ref];
             if (parsedValue === undefined) {
                 let { ignoreUndefinedEntities , resolveUndefinedEntity  } = this.options;
-                let wrappedRef = `&${ref};`;
+                let wrappedRef = `&amp;${ref};`;
                 if (resolveUndefinedEntity) {
                     let resolvedValue = resolveUndefinedEntity(wrappedRef);
-                    if (resolvedValue !== null && resolvedValue !== undefined) {
+                    if (resolvedValue !== null &amp;&amp; resolvedValue !== undefined) {
                         let type = typeof resolvedValue;
                         if (type !== 'string') {
                             throw new TypeError(`\`resolveUndefinedEntity()\` must return a string, \`null\`, or \`undefined\`, but returned a value of type ${type}`);
@@ -718,26 +801,26 @@ class Parser {
     }
     consumeXmlDeclaration() {
         let { scanner  } = this;
-        if (!scanner.consumeStringFast('<?xml')) {
+        if (!scanner.consumeStringFast('&lt;?xml')) {
             return false;
         }
         if (!this.consumeWhitespace()) {
             this.error('Invalid XML declaration');
         }
-        let version = Boolean(scanner.consumeStringFast('version')) && this.consumeEqual() && this.consumeSystemLiteral();
+        let version = Boolean(scanner.consumeStringFast('version')) &amp;&amp; this.consumeEqual() &amp;&amp; this.consumeSystemLiteral();
         if (version === false) {
             this.error('XML version is missing or invalid');
         } else if (!/^1\.[0-9]+$/.test(version)) {
             this.error('Invalid character in version number');
         }
         if (this.consumeWhitespace()) {
-            let encoding = Boolean(scanner.consumeStringFast('encoding')) && this.consumeEqual() && this.consumeSystemLiteral();
+            let encoding = Boolean(scanner.consumeStringFast('encoding')) &amp;&amp; this.consumeEqual() &amp;&amp; this.consumeSystemLiteral();
             if (encoding) {
                 this.consumeWhitespace();
             }
-            let standalone = Boolean(scanner.consumeStringFast('standalone')) && this.consumeEqual() && this.consumeSystemLiteral();
+            let standalone = Boolean(scanner.consumeStringFast('standalone')) &amp;&amp; this.consumeEqual() &amp;&amp; this.consumeSystemLiteral();
             if (standalone) {
-                if (standalone !== 'yes' && standalone !== 'no') {
+                if (standalone !== 'yes' &amp;&amp; standalone !== 'no') {
                     this.error('Only "yes" and "no" are permitted as values of `standalone`');
                 }
                 this.consumeWhitespace();
@@ -753,7 +836,7 @@ class Parser {
         let column = 1;
         let excerpt = '';
         let line = 1;
-        for(let i = 0; i < charIndex; ++i){
+        for(let i = 0; i &lt; charIndex; ++i){
             let __char = xml[i];
             if (__char === '\n') {
                 column = 1;
@@ -768,7 +851,7 @@ class Parser {
         excerpt += eol === -1 ? xml.slice(charIndex) : xml.slice(charIndex, eol);
         let excerptStart = 0;
         if (excerpt.length > 50) {
-            if (column < 40) {
+            if (column &lt; 40) {
                 excerpt = excerpt.slice(0, 50);
             } else {
                 excerptStart = column - 20;
@@ -848,7 +931,7 @@ class XmlNamespaceStack {
         }
         let prefix;
         prefixes.forEach(function(p) {
-            if (!prefix || p.length < prefix.length) {
+            if (!prefix || p.length &lt; prefix.length) {
                 prefix = p;
             }
         });
@@ -921,10 +1004,10 @@ class XmlNamespaceStack {
         if (ns !== namespace) return false;
         if (!Array.isArray(element.children)) return true;
         let childrenAreOk = true;
-        for(let i = 0; i < element.children.length; i++){
+        for(let i = 0; i &lt; element.children.length; i++){
             const child = element.children[i];
             if (!(child instanceof XmlElement)) continue;
-            childrenAreOk = childrenAreOk && this.verifyNamespace(namespace, child, nsStack);
+            childrenAreOk = childrenAreOk &amp;&amp; this.verifyNamespace(namespace, child, nsStack);
             if (!childrenAreOk) break;
         }
         nsStack.pop();
@@ -951,15 +1034,15 @@ class XmlNamespaceStack {
     }
     static encodeXmlTextString(text) {
         const itemIsString = (i)=>typeof i === 'string', encodings = {
-            '<': '&lt;',
-            '>': '&gt;',
-            '&': '&amp;',
-            "'": '&apos;',
-            '"': '&quot;'
+            '&lt;': '&amp;lt;',
+            '>': '&amp;gt;',
+            '&amp;': '&amp;amp;',
+            "'": '&amp;apos;',
+            '"': '&amp;quot;'
         };
         if (!itemIsString(text)) return null;
         let result = '';
-        for(let i = 0; i < text.length; i++){
+        for(let i = 0; i &lt; text.length; i++){
             const __char = text.charAt(i);
             result += encodings[__char] || __char;
         }
@@ -984,19 +1067,19 @@ class Writer {
             contents += this.elementToString(n, nsStack);
             nsStack.pop();
         }
-        return `<${element.name}${attributes}>${contents}</${element.name}>`;
+        return `&lt;${element.name}${attributes}>${contents}&lt;/${element.name}>`;
     }
     static _encodeXmlTextString(text) {
         const itemIsString = (i)=>typeof i === 'string', encodings = {
-            '<': '&lt;',
-            '>': '&gt;',
-            '&': '&amp;',
-            "'": '&apos;',
-            '"': '&quot;'
+            '&lt;': '&amp;lt;',
+            '>': '&amp;gt;',
+            '&amp;': '&amp;amp;',
+            "'": '&amp;apos;',
+            '"': '&amp;quot;'
         };
         if (!itemIsString(text)) return null;
         let result = '';
-        for(let i = 0; i < text.length; i++){
+        for(let i = 0; i &lt; text.length; i++){
             const __char = text.charAt(i);
             result += encodings[__char] || __char;
         }
@@ -1040,7 +1123,7 @@ class Json extends GenericData {
             nsStack.push(element);
             const namespace = nsStack.findNamespace(element.name);
             if (!namespace) throw new Error(`namespace is not json's`);
-            if (!(new URL(namespace).href === GenericData.namespace.href && XmlNamespaceStack.getElementNameWithoutPrefix(element.name) === Json.tag)) throw 'not an int';
+            if (!(new URL(namespace).href === GenericData.namespace.href &amp;&amp; XmlNamespaceStack.getElementNameWithoutPrefix(element.name) === Json.tag)) throw 'not an int';
             let text = '';
             for (const node of element.children){
                 if (![
@@ -1077,7 +1160,7 @@ class Json extends GenericData {
         return element;
     }
     static fromIndexedDb(encodedData) {
-        if (!(encodedData && typeof encodedData === 'object' && !Array.isArray(encodedData) && encodedData.type === `${Json.namespace} ${Json.tag}`)) throw new Error('wrong IndexedDB object');
+        if (!(encodedData &amp;&amp; typeof encodedData === 'object' &amp;&amp; !Array.isArray(encodedData) &amp;&amp; encodedData.type === `${Json.namespace} ${Json.tag}`)) throw new Error('wrong IndexedDB object');
         return new Json(encodedData.value);
     }
     toIndexedDb() {
@@ -1167,7 +1250,7 @@ class SemanticData extends GenericData {
         return element;
     }
     static fromIndexedDb(encodedData) {
-        if (!(encodedData && typeof encodedData === 'object' && !Array.isArray(encodedData) && encodedData.type === `${SemanticData.namespace} ${SemanticData.tag}` && typeof encodedData.value === 'object' && typeof encodedData.value.type === 'string' && typeof encodedData.value.text === 'string')) throw new Error('wrong IndexedDB object');
+        if (!(encodedData &amp;&amp; typeof encodedData === 'object' &amp;&amp; !Array.isArray(encodedData) &amp;&amp; encodedData.type === `${SemanticData.namespace} ${SemanticData.tag}` &amp;&amp; typeof encodedData.value === 'object' &amp;&amp; typeof encodedData.value.type === 'string' &amp;&amp; typeof encodedData.value.text === 'string')) throw new Error('wrong IndexedDB object');
         let detectedType = SemanticData.dataTypes[0];
         for (const dataType of SemanticData.dataTypes){
             if (`${dataType}` === encodedData.value.type) {
@@ -1297,10 +1380,10 @@ class Fault extends Instruction {
         }
         if (faultTypes.length === 0) return true;
         if (faultTypes.includes(this.type)) return true;
-        if (Fault.serviceTypes.includes(this.type) && faultTypes.includes(Fault.serviceTypes[0])) return true;
-        if (Fault.networkTypes.includes(this.type) && faultTypes.includes(Fault.networkTypes[0])) return true;
-        if (Fault.userAgentTypes.includes(this.type) && faultTypes.includes(Fault.userAgentTypes[0])) return true;
-        if (this.type.startsWith(Fault.serviceSpecificPrefix) && faultTypes.includes('service-specific')) return true;
+        if (Fault.serviceTypes.includes(this.type) &amp;&amp; faultTypes.includes(Fault.serviceTypes[0])) return true;
+        if (Fault.networkTypes.includes(this.type) &amp;&amp; faultTypes.includes(Fault.networkTypes[0])) return true;
+        if (Fault.userAgentTypes.includes(this.type) &amp;&amp; faultTypes.includes(Fault.userAgentTypes[0])) return true;
+        if (this.type.startsWith(Fault.serviceSpecificPrefix) &amp;&amp; faultTypes.includes('service-specific')) return true;
         return false;
     }
     static fromXmlElement(element, namespaceStack) {
@@ -1310,7 +1393,7 @@ class Fault extends Instruction {
             nsStack.push(element);
             const namespace = nsStack.findNamespace(element.name), tag = XmlNamespaceStack.getElementNameWithoutPrefix(element.name);
             if (!namespace) throw new Error(`namespace is not json's`);
-            if (!(new URL(namespace).href === Fault.namespace.href && tag === this.tag)) throw `not a ${this.tag}`;
+            if (!(new URL(namespace).href === Fault.namespace.href &amp;&amp; tag === this.tag)) throw `not a ${this.tag}`;
             const type1 = element.attributes.type || Fault.defaultType;
             result = new Fault(type1);
         } catch (error) {
@@ -1367,7 +1450,7 @@ class Return extends Instruction {
             nsStack.push(element);
             const namespace = nsStack.findNamespace(element.name), tag = mod.NamespaceStack.getElementNameWithoutPrefix(element.name);
             if (!namespace) throw new Error(`not a namespace`);
-            if (!(new URL(namespace).href === Return.namespace.href && tag === this.tag)) throw `not a ${this.tag}`;
+            if (!(new URL(namespace).href === Return.namespace.href &amp;&amp; tag === this.tag)) throw `not a ${this.tag}`;
             let statement = null;
             for (const statementElement of element.children){
                 if (!(statementElement.type === mod.Node.TYPE_ELEMENT)) continue;
@@ -1445,7 +1528,7 @@ class Sequence extends Instruction {
             nsStack.push(element);
             const namespace = nsStack.findNamespace(element.name), tag = XmlNamespaceStack.getElementNameWithoutPrefix(element.name);
             if (!namespace) throw new Error(`not a namespace`);
-            if (!(new URL(namespace).href === Sequence.namespace.href && tag === this.tag)) throw `not a ${this.tag}`;
+            if (!(new URL(namespace).href === Sequence.namespace.href &amp;&amp; tag === this.tag)) throw `not a ${this.tag}`;
             const statements = [];
             for (const statementElement of element.children){
                 if (!(statementElement.type === XmlNode.TYPE_ELEMENT)) continue;
@@ -1505,7 +1588,7 @@ class Data extends Instruction {
             path
         ];
         if (p.length === 0) throw new Error('path must have at least one element');
-        for(let i = 0; i < p.length; i++){
+        for(let i = 0; i &lt; p.length; i++){
             const e = p[i];
             if (!(typeof e === "string")) throw new Error('path element must be a string');
             p[i] = e.trim();
@@ -1526,14 +1609,14 @@ class Data extends Instruction {
             nsStack.push(element);
             const namespace = nsStack.findNamespace(element.name), tag = XmlNamespaceStack.getElementNameWithoutPrefix(element.name);
             if (!namespace) throw new Error(`not a namespace`);
-            if (!(new URL(namespace).href === Data.namespace.href && tag === this.tag)) throw `not a ${this.tag}`;
+            if (!(new URL(namespace).href === Data.namespace.href &amp;&amp; tag === this.tag)) throw `not a ${this.tag}`;
             const maybePath = element.attributes.path;
             if (typeof maybePath !== 'string') throw new Error(`${this.tag} must have a path`);
             let path = [];
             try {
                 path = JSON.parse(maybePath);
-                if (!(path instanceof Array && path.length > 0)) throw new Error('invalid data path');
-                for(let i = 0; i < path.length; i++){
+                if (!(path instanceof Array &amp;&amp; path.length > 0)) throw new Error('invalid data path');
+                for(let i = 0; i &lt; path.length; i++){
                     const pathElement = path[i];
                     if (!(typeof pathElement === "string")) {
                         throw new Error('invalid path element');
@@ -1676,7 +1759,7 @@ class Try extends Instruction {
             nsStack.push(element);
             const namespace = nsStack.findNamespace(element.name), tag = XmlNamespaceStack.getElementNameWithoutPrefix(element.name);
             if (!namespace) throw new Error(`not a namespace`);
-            if (!(new URL(namespace).href === Try.namespace.href && tag === this.tag)) throw `not a ${this.tag}`;
+            if (!(new URL(namespace).href === Try.namespace.href &amp;&amp; tag === this.tag)) throw `not a ${this.tag}`;
             let statement = null, catchClauses = [];
             for (const e of element.children){
                 if (!(e.type === XmlNode.TYPE_ELEMENT)) continue;
@@ -1688,7 +1771,7 @@ class Try extends Instruction {
                     nsStack.push(e);
                     const catchNamespace = nsStack.findNamespace(e.name), tag1 = XmlNamespaceStack.getElementNameWithoutPrefix(e.name);
                     if (!catchNamespace) throw new Error(`element without namespace`);
-                    if (!(new URL(catchNamespace).href === Try.namespace.href && tag1 === 'catch')) throw `not a catch clause`;
+                    if (!(new URL(catchNamespace).href === Try.namespace.href &amp;&amp; tag1 === 'catch')) throw `not a catch clause`;
                     let faultsToCatch = [], catchStatements = [];
                     if (typeof e.attributes.faults === 'string') {
                         faultsToCatch = JSON.parse(e.attributes.faults).map((s)=>s.trim());
@@ -1822,7 +1905,7 @@ class Goto extends Instruction {
             nsStack.push(element);
             const namespace = nsStack.findNamespace(element.name), tag = XmlNamespaceStack.getElementNameWithoutPrefix(element.name);
             if (!namespace) throw new Error(`not a namespace`);
-            if (!(new URL(namespace).href === Goto.namespace.href && tag === this.tag)) throw `not a ${this.tag}`;
+            if (!(new URL(namespace).href === Goto.namespace.href &amp;&amp; tag === this.tag)) throw `not a ${this.tag}`;
             let href = null, parameters = [];
             if (typeof element.attributes.href === 'string') href = element.attributes.href;
             for (const parametersElement of element.children){
@@ -1831,14 +1914,14 @@ class Goto extends Instruction {
                     nsStack.push(parametersElement);
                     const parametersNamespace = nsStack.findNamespace(parametersElement.name), parametersTag = XmlNamespaceStack.getElementNameWithoutPrefix(parametersElement.name);
                     if (!parametersNamespace) throw new Error(`not a namespace`);
-                    if (!(new URL(parametersNamespace).href === Goto.namespace.href && parametersTag === 'data-args')) throw `not a parameters`;
+                    if (!(new URL(parametersNamespace).href === Goto.namespace.href &amp;&amp; parametersTag === 'data-args')) throw `not a parameters`;
                     for (const parameterElement of parametersElement.children){
                         if (parameterElement.type !== XmlNode.TYPE_ELEMENT) continue;
                         try {
                             nsStack.push(parameterElement);
                             const parameterNamespace = nsStack.findNamespace(parameterElement.name), parameterTag = XmlNamespaceStack.getElementNameWithoutPrefix(parameterElement.name);
                             if (!parameterNamespace) throw new Error(`not a namespace`);
-                            if (!(new URL(parameterNamespace).href === Goto.namespace.href && parameterTag === 'data-arg')) throw `not a parameter`;
+                            if (!(new URL(parameterNamespace).href === Goto.namespace.href &amp;&amp; parameterTag === 'data-arg')) throw `not a parameter`;
                             if (!(typeof parameterElement.attributes.name === 'string')) throw new Error('parameter without name');
                             const parameterName = parameterElement.attributes.name;
                             for (const parameterValueElement of parameterElement.children){
@@ -1929,7 +2012,7 @@ class Call extends Instruction {
             object
         ];
         if (o.length === 0) o.push('@');
-        for(let i = 0; i < o.length; i++){
+        for(let i = 0; i &lt; o.length; i++){
             const e = o[i];
             if (!(typeof e === "string")) throw new Error('object path element must be a string');
             o[i] = e.trim();
@@ -2019,14 +2102,14 @@ class Call extends Instruction {
             nsStack.push(element);
             const namespace = nsStack.findNamespace(element.name), tag = XmlNamespaceStack.getElementNameWithoutPrefix(element.name);
             if (!namespace) throw new Error(`not a namespace`);
-            if (!(new URL(namespace).href === Call.namespace.href && tag === this.tag)) throw `not a ${this.tag}`;
+            if (!(new URL(namespace).href === Call.namespace.href &amp;&amp; tag === this.tag)) throw `not a ${this.tag}`;
             const maybeObject = element.attributes.object;
             if (typeof maybeObject !== 'string') throw new Error(`${this.tag} must have a path`);
             let object = [];
             try {
                 object = JSON.parse(maybeObject);
-                if (!(object instanceof Array && object.length > 0)) throw new Error('invalid object path');
-                for(let i = 0; i < object.length; i++){
+                if (!(object instanceof Array &amp;&amp; object.length > 0)) throw new Error('invalid object path');
+                for(let i = 0; i &lt; object.length; i++){
                     const pathElement = object[i];
                     if (!(typeof pathElement === "string")) {
                         throw new Error('invalid path element');
@@ -2043,14 +2126,14 @@ class Call extends Instruction {
                     nsStack.push(objectParametersElement);
                     const objectParametersNamespace = nsStack.findNamespace(objectParametersElement.name), objectParametersTag = XmlNamespaceStack.getElementNameWithoutPrefix(objectParametersElement.name);
                     if (!objectParametersNamespace) throw new Error(`not a namespace`);
-                    if (!(new URL(objectParametersNamespace).href === Call.namespace.href && objectParametersTag === 'object-args')) throw `not an object parameters element`;
+                    if (!(new URL(objectParametersNamespace).href === Call.namespace.href &amp;&amp; objectParametersTag === 'object-args')) throw `not an object parameters element`;
                     for (const objectParameterElement of objectParametersElement.children){
                         if (objectParameterElement.type !== XmlNode.TYPE_ELEMENT) continue;
                         try {
                             nsStack.push(objectParameterElement);
                             const objectParameterNamespace = nsStack.findNamespace(objectParameterElement.name), objectParameterTag = XmlNamespaceStack.getElementNameWithoutPrefix(objectParameterElement.name);
                             if (!objectParameterNamespace) throw new Error(`not a namespace`);
-                            if (!(new URL(objectParameterNamespace).href === Call.namespace.href && objectParameterTag === 'object-arg')) throw `not an object parameter`;
+                            if (!(new URL(objectParameterNamespace).href === Call.namespace.href &amp;&amp; objectParameterTag === 'object-arg')) throw `not an object parameter`;
                             if (!(typeof objectParameterElement.attributes.name === 'string')) throw new Error('object parameter without name');
                             const objectParameterName = objectParameterElement.attributes.name, objectParameterObject = objectParameterElement.attributes.object;
                             objectParameters.push({
@@ -2075,7 +2158,7 @@ class Call extends Instruction {
                     nsStack.push(parametersElement);
                     const parametersNamespace = nsStack.findNamespace(parametersElement.name), parametersTag = XmlNamespaceStack.getElementNameWithoutPrefix(parametersElement.name);
                     if (!parametersNamespace) throw new Error(`not a namespace`);
-                    if (!(new URL(parametersNamespace).href === Call.namespace.href && parametersTag === 'data-args')) throw `not a parameters element`;
+                    if (!(new URL(parametersNamespace).href === Call.namespace.href &amp;&amp; parametersTag === 'data-args')) throw `not a parameters element`;
                     sendParameters = parametersElement.attributes.name === 'true';
                     for (const parameterElement of parametersElement.children){
                         if (parameterElement.type !== XmlNode.TYPE_ELEMENT) continue;
@@ -2083,7 +2166,7 @@ class Call extends Instruction {
                             nsStack.push(parameterElement);
                             const parameterNamespace = nsStack.findNamespace(parameterElement.name), parameterTag = XmlNamespaceStack.getElementNameWithoutPrefix(parameterElement.name);
                             if (!parameterNamespace) throw new Error(`not a namespace`);
-                            if (!(new URL(parameterNamespace).href === Call.namespace.href && parameterTag === 'data-arg')) throw `not a parameter`;
+                            if (!(new URL(parameterNamespace).href === Call.namespace.href &amp;&amp; parameterTag === 'data-arg')) throw `not a parameter`;
                             if (!(typeof parameterElement.attributes.name === 'string')) throw new Error('parameter without name');
                             const parameterName = parameterElement.attributes.name;
                             for (const parameterValueElement of parameterElement.children){
@@ -2232,11 +2315,11 @@ class PhaseParameters {
             if (!doc) throw new Error('not a document');
             if (!nsStack) throw new Error('namespace stack was not initialized');
             let elementNs = nsStack.findNamespace(doc.root.name), elementNameParts = doc.root.name.split(':'), elementName = elementNameParts.length === 1 ? elementNameParts[0] : elementNameParts[1];
-            if (!(elementNs === PhaseParameters.namespace.href && elementName === 'data-args')) throw new Error('not a valid phase-parameters message');
+            if (!(elementNs === PhaseParameters.namespace.href &amp;&amp; elementName === 'data-args')) throw new Error('not a valid phase-parameters message');
             for (const paramElement of doc.root.children){
                 if (paramElement.type !== XmlNode.TYPE_ELEMENT) continue;
                 let paramElementNs = nsStack.findNamespace(paramElement.name), paramElementNameParts = paramElement.name.split(':'), paramElementName = paramElementNameParts.length === 1 ? paramElementNameParts[0] : paramElementNameParts[1];
-                if (!(paramElementNs === PhaseParameters.namespace.href && paramElementName === 'data-arg')) throw new Error('not a param');
+                if (!(paramElementNs === PhaseParameters.namespace.href &amp;&amp; paramElementName === 'data-arg')) throw new Error('not a param');
                 const paramName = paramElement.attributes['name'];
                 if (typeof paramName !== 'string') throw new Error('param name must be a string');
                 nsStack.push(paramElement);
@@ -2508,7 +2591,7 @@ class QworumRuntimeModule {
      * @async
      * @param {string[] | string} path - The path of the data container.
      * @param {QworumRuntimeModule.message.Json | QworumRuntimeModule.message.SemanticData} newValue
-     * @return {Promise<QworumRuntimeModule.message.Json | QworumRuntimeModule.message.SemanticData>} - The new value of the data container.
+     * @return {Promise&lt;QworumRuntimeModule.message.Json | QworumRuntimeModule.message.SemanticData>} - The new value of the data container.
      * @example
      * try{
      *   await QworumRuntimeModule.setData('year', QworumRuntimeModule.Json(2022));
@@ -2522,12 +2605,12 @@ class QworumRuntimeModule {
         Qworum._log(`[setData] `);
         // validate path
         if (typeof path === 'string') path = [path];
-        if (!(path instanceof Array && !path.find(e => (typeof e !== 'string')))) {
+        if (!(path instanceof Array &amp;&amp; !path.find(e => (typeof e !== 'string')))) {
             return Promise.reject(new Error('Invalid path'));
         }
         // validate newValue
         if (!(
-            newValue &&
+            newValue &amp;&amp;
             [QworumRuntimeModule.message.Json, QworumRuntimeModule.message.SemanticData].find(dataType => (newValue instanceof dataType))
         )) return Promise.reject(new Error('Invalid value'));
 
@@ -2552,7 +2635,7 @@ class QworumRuntimeModule {
      * @static
      * @async
      * @param {string[] | string} path - The path of the data container.
-     * @return {Promise<QworumRuntimeModule.message.Json | QworumRuntimeModule.message.SemanticData>} - The value in the data container.
+     * @return {Promise&lt;QworumRuntimeModule.message.Json | QworumRuntimeModule.message.SemanticData>} - The value in the data container.
      * @example
      * try{
      *   const result = await QworumRuntimeModule.getData(['a data']);
@@ -2567,7 +2650,7 @@ class QworumRuntimeModule {
     static async getData(path) { // TODO replace callbacks with promises?
         Qworum._log(`[getData] `);
         if (typeof path === 'string') path = [path];
-        if (!(path instanceof Array && !path.find(e => (typeof e !== 'string')))){
+        if (!(path instanceof Array &amp;&amp; !path.find(e => (typeof e !== 'string')))){
             return Promise.reject(new Error('Invalid path'));
         }
 
@@ -2600,7 +2683,7 @@ class QworumRuntimeModule {
      * @static
      * @async
      * @param {QworumRuntimeModule.message.Script} script
-     * @return {Promise<void>}
+     * @return {Promise&lt;void>}
      * @example
      * try{
      *   await QworumRuntimeModule.eval(QworumRuntimeModule.Script(QworumRuntimeModule.Goto('next-phase/')));
@@ -2744,7 +2827,7 @@ class Qworum {
      * 🚀 Checks that the Qworum browser extension is installed and running.
      * @static
      * @async
-     * @return {Promise<void>} 
+     * @return {Promise&lt;void>} 
      * @example
      * try{
      *   await Qworum.ping();
@@ -2818,7 +2901,7 @@ class Qworum {
 
         // extension info for this browser
         let browserExtensionInfo = null, browserType = null;
-        if (chrome && chrome.runtime && chrome.runtime.sendMessage) {
+        if (chrome &amp;&amp; chrome.runtime &amp;&amp; chrome.runtime.sendMessage) {
             // this browser is compatible with Chrome Web Store
             browserType = 'chrome';
             browserExtensionInfo = { browserType, extensionId: browserExtensionIds[browserType] };
@@ -2837,3 +2920,25 @@ class Qworum {
 // Qworum.init();
 
 export { Qworum };
+</code></pre>
+  </article>
+</section>
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+
+</body>
+</html>

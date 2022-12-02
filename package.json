@@ -3,6 +3,6 @@
     "generate-docs": "jsdoc --configure jsdoc.json --verbose"
   },
   "devDependencies": {
-    "clean-jsdoc-theme": "^4.1.8"
+    "jsdoc-fresh": "^2.0.1"
   }
 }

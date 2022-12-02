@@ -15,7 +15,7 @@
     "destination": "docs/",
     "recurse": true,
     "verbose": true,
-    "template": "./node_modules/clean-jsdoc-theme",
+    "template": "./node_modules/jsdoc-fresh",
     "theme_opts": {
       "homepageTitle": "Qworum JavaScript library for web pages",
       "title": "Qworum JavaScript library for web pages",
