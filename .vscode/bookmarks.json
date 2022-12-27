@@ -4,23 +4,13 @@
 			"path": "qworum-for-web-pages.mjs",
 			"bookmarks": [
 				{
-					"line": 2307,
+					"line": 2366,
+					"column": 27,
+					"label": ""
+				},
+				{
+					"line": 2378,
 					"column": 14,
-					"label": ""
-				},
-				{
-					"line": 2319,
-					"column": 22,
-					"label": ""
-				},
-				{
-					"line": 2345,
-					"column": 40,
-					"label": ""
-				},
-				{
-					"line": 2373,
-					"column": 28,
 					"label": ""
 				},
 				{
@@ -29,57 +19,72 @@
 					"label": ""
 				},
 				{
-					"line": 2403,
-					"column": 11,
+					"line": 2417,
+					"column": 40,
 					"label": ""
 				},
 				{
-					"line": 2416,
-					"column": 9,
-					"label": ""
-				},
-				{
-					"line": 2429,
+					"line": 2445,
 					"column": 28,
 					"label": ""
 				},
 				{
-					"line": 2448,
-					"column": 26,
+					"line": 2462,
+					"column": 22,
 					"label": ""
 				},
 				{
-					"line": 2466,
-					"column": 25,
+					"line": 2475,
+					"column": 11,
 					"label": ""
 				},
 				{
-					"line": 2479,
-					"column": 23,
+					"line": 2488,
+					"column": 9,
 					"label": ""
 				},
 				{
-					"line": 2500,
-					"column": 38,
+					"line": 2501,
+					"column": 28,
 					"label": ""
 				},
 				{
 					"line": 2520,
+					"column": 26,
+					"label": ""
+				},
+				{
+					"line": 2538,
+					"column": 25,
+					"label": ""
+				},
+				{
+					"line": 2551,
+					"column": 23,
+					"label": ""
+				},
+				{
+					"line": 2572,
+					"column": 38,
+					"label": ""
+				},
+				{
+					"line": 2593,
 					"column": 46,
 					"label": ""
 				},
 				{
-					"line": 2566,
+					"line": 2640,
 					"column": 33,
 					"label": ""
 				},
 				{
-					"line": 2612,
+					"line": 2687,
 					"column": 31,
 					"label": ""
 				},
 				{
-					"line": 2709,
+					"line": 2784,
 					"column": 7,
 					"label": ""
 				}
