@@ -10,9 +10,9 @@ With this library web pages can:
 
 ## Usage
 
-1. First, copy and paste [qworum-for-web-pages.mjs](https://github.com/doga/qworum-for-web-pages/blob/master/qworum-for-web-pages.mjs) into your web frontend project directory.
+1. First, copy and paste [qworum-for-web-pages.js](https://github.com/doga/qworum-for-web-pages/blob/master/qworum-for-web-pages.js) into your web frontend project directory.
 1. Then create a JavaScript file for your web frontend project and link it to your web page like this: `<script type="module" src="./path/to/your.js"></script>`. [Example](https://github.com/doga/qworum-demo/blob/master/src/websites/shop.demo.qworum.net/home/index.html).
-1. After that, import the Qworum library like this in _your.js_: `import { Qworum } from "./path/to/qworum-for-web-pages.mjs";`. [Example](https://github.com/doga/qworum-demo/blob/master/src/websites/shop.demo.qworum.net/_assets/js/home.js).
+1. After that, import the Qworum library like this in _your.js_: `import { Qworum } from "./path/to/qworum-for-web-pages.js";`. [Example](https://github.com/doga/qworum-demo/blob/master/src/websites/shop.demo.qworum.net/_assets/js/home.js).
 
 Sample frontend projects that show how this library is used:
 

@@ -1,7 +1,7 @@
 {
 	"files": [
 		{
-			"path": "qworum-for-web-pages.mjs",
+			"path": "esm/qworum-for-web-pages.js",
 			"bookmarks": [
 				{
 					"line": 2364,

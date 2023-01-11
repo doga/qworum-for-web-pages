@@ -1,7 +1,7 @@
 {
   "source": {
     "include": [
-      "qworum-for-web-pages.mjs"
+      "./esm/qworum-for-web-pages.js"
     ],
     "includePattern": "(.mjs|.js)$",
     "excludePattern": "(node_modules/|docs)"
