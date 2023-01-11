@@ -2425,7 +2425,7 @@ class Qworum {
      * @static
      * @type {string}
      */
-    static version = '1.0.7';
+    static version = '1.0.8';
 
     /** 
      * A static array containing the Qworum instruction and data classes. 
@@ -2773,12 +2773,14 @@ class Qworum {
             response = await this._sendRequest(request);
 
             if (response.status.code !== 200) {
-                return Promise.reject(new Error(
-                    `API error: ${response.status.code} ${response.status.message}${response.body.message ? `, ${response.body.message}` : ''}`
-                ));
+                const errorMessage = 
+                `API error: ${response.status.code} ${response.status.message}${response.body.message ? `, ${response.body.message}` : ''}`;
+
+                console.error(`[Qworum for web pages] error while setting data: ${errorMessage}`);
+                return Promise.reject(new Error(errorMessage));
             }
 
-            return Promise.resolve();
+            return Promise.resolve(null);
         } catch (error) {
             return Promise.reject(error);
         }
@@ -2791,7 +2793,7 @@ class Qworum {
      * @static
      * @async
      * @param {(string[] | string)} path - The path of the data container.
-     * @return {Promise.<(Qworum.message.Json | Qworum.message.SemanticData)>} - The value in the data container. Can throw a TypeError or Error.
+     * @return {Promise.<(Qworum.message.Json | Qworum.message.SemanticData | null)>} - The value in the data container, or null if the value is not set. Can throw a TypeError or Error.
      * @example
      * try{
      *   const result = await Qworum.getData(['a data']);
@@ -2815,11 +2817,20 @@ class Qworum {
         // call the endpoint
         try {
             const 
-            request  = {apiVersion, endpoint: 'Set data', body: {path}},
+            request  = {apiVersion, endpoint: 'Get data', body: {path}},
             response = await this._sendRequest(request);
 
             if (response.status.code !== 200) {
-                return Promise.reject(new Error(`API error: ${response.status.code} ${response.status.message}${response.body.message ? `, ${response.body.message}` : ''}`));
+                if (response.status.code === 404) {
+                    // data not found
+                    return Promise.resolve(null);
+                } else {
+                    const errorMessage = 
+                    `API error: ${response.status.code} ${response.status.message}${response.body.message ? `, ${response.body.message}` : ''}`;
+    
+                    console.error(`[Qworum for web pages] error while getting data: ${errorMessage}`);
+                    return Promise.reject(new Error(errorMessage));
+                }
             }
 
             return Promise.resolve(
@@ -2865,8 +2876,8 @@ class Qworum {
     static getBrowserExtensionInfo() {
         // extension ids for all supported browsers
         const 
-        // isProductionMode = true,
-        isProductionMode = false,
+        isProductionMode = true,
+        // isProductionMode = false,
         browserExtensionIds = {
             // The following extension will be published on the Chrome Web Store (https://chrome.google.com/webstore/category/extensions).
             // Browsers that support Chrome Web Store: Google Chrome, Microsoft Edge, Brave, Opera ...
@@ -2911,7 +2922,7 @@ class Qworum {
     }
 
     static _log(message) {
-        console.info(`[Qworum for web pages] ${message}`);
+        // console.info(`[Qworum for web pages] ${message}`);
     }
 }
 
