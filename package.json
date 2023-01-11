@@ -1,4 +1,7 @@
 {
+  "name": "qworum-for-web-pages",
+  "version": "1.0.8",
+  "author": "Doğa Armangil <d.armangil@qworum.net>",
   "module": "./esm/qworum-for-web-pages.js",
   "exports": {
     ".": "./esm/qworum-for-web-pages.js"
