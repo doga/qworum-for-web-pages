@@ -9,6 +9,11 @@ task :help do
     sh "rake -T"
 end
 
+desc 'Build'
+task :build do
+    sh "npm run build"
+end
+
 desc 'Build a TypeScript types file from JSdoc comments'
 task :types do
     sh "npm run create-types" # .mjs extension not supported!!!
@@ -24,7 +29,6 @@ end
 desc 'Check Skypack.dev compatibility'
 task :skypack_check do
   sh "npm run skypack-check"
-  # sh "jsdoc #{tmpfile} -d docs --readme README.md" # default template (Google doesn't like it)
 end
 
 desc 'Empty the docs directory'
