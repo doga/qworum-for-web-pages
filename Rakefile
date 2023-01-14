@@ -14,6 +14,11 @@ task :build do
     sh "npm run build"
 end
 
+desc 'Publish to NPM'
+task :publish do
+    sh "npm run publish-to-npm"
+end
+
 desc 'Build a TypeScript types file from JSdoc comments'
 task :types do
     sh "npm run create-types" # .mjs extension not supported!!!

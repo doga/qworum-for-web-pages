@@ -1,23 +1,20 @@
 # Qworum for web pages
 
-Qworum JavaScript library for use inside web pages on web browsers.
-Qworum is the _Service Web_ that enables distributed web applications. See the [Qworum website](https://qworum.net).
+This is [Qworum](https://qworum.net)'s official JavaScript library for web frontends.
 
-With this library web pages can:
+Using this library, web pages can communicate with the Qworum browser extension for:
 
-1. verify that the Qworum extension is installed and enabled on the end-user's browser.
-1. use Qworum's capabilities by communicating with the Qworum browser extension.
+- executing Qworum scripts,
+- reading session data (such as reading the call arguments for the current service call),
+- writing session data.
 
-## Usage
+## How to import this library into your frontend code
 
-1. First, copy and paste [qworum-for-web-pages.js](https://github.com/doga/qworum-for-web-pages/blob/master/qworum-for-web-pages.js) into your web frontend project directory.
-1. Then create a JavaScript file for your web frontend project and link it to your web page like this: `<script type="module" src="./path/to/your.js"></script>`. [Example](https://github.com/doga/qworum-demo/blob/master/src/websites/shop.demo.qworum.net/home/index.html).
-1. After that, import the Qworum library like this in _your.js_: `import { Qworum } from "./path/to/qworum-for-web-pages.js";`. [Example](https://github.com/doga/qworum-demo/blob/master/src/websites/shop.demo.qworum.net/_assets/js/home.js).
+This library is an ECMAScript module that does not have any dependencies. It can be imported in three ways:
 
-Sample frontend projects that show how this library is used:
-
-- [Demo that uses JSON as its data format](https://github.com/doga/qworum-demo).
-- [Demo that uses RDF-based semantic data formats such as JSON-LD and N-Quads](https://github.com/doga/qworum-demo-semantic).
+- _(Recommended)_ Import from the Skypack CDN. Example: `import { Qworum } from "https://cdn.skypack.dev/@qworum/qworum-for-web-pages@1.0.9";`.
+- Import by copying [the `qworum-for-web-pages.js` file on GitHub](https://github.com/doga/qworum-for-web-pages/blob/master/esm/qworum-for-web-pages.js) into a local file. For example you can name your local copy `qworum-for-web-pages.mjs` and import it thusly: `import { Qworum } from "path/to/qworum-for-web-pages.mjs";`.
+- Use a bundler for importing from NPM. Search for `@qworum/qworum-for-web-pages` on NPM.
 
 ## License
 

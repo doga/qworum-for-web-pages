@@ -24,10 +24,11 @@
     "url" : "https://github.com/doga/qworum-for-web-pages.git"
   },
   "scripts": {
-    "generate-docs": "jsdoc --configure jsdoc.json --verbose",
-    "create-types" : "tsc",
-    "skypack-check": "npx package-check",
-    "build"        : "npm run skypack-check && npm run create-types && npm run generate-docs && date"
+    "generate-docs" : "jsdoc --configure jsdoc.json --verbose",
+    "create-types"  : "tsc",
+    "skypack-check" : "npx package-check",
+    "build"         : "npm run skypack-check && npm run create-types && npm run generate-docs && date",
+    "publish-to-npm": "npm publish --access public"
   },
   "devDependencies": {
     "@skypack/package-check": "^0.2.2",
