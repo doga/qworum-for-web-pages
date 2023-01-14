@@ -16,6 +16,12 @@ This library is an ECMAScript module that does not have any dependencies. It can
 - Import by copying [the `qworum-for-web-pages.js` file on GitHub](https://github.com/doga/qworum-for-web-pages/blob/master/esm/qworum-for-web-pages.js) into a local file. For example you can name your local copy `qworum-for-web-pages.mjs` and import it thusly: `import { Qworum } from "path/to/qworum-for-web-pages.mjs";`.
 - Use a bundler for importing from NPM. Search for `@qworum/qworum-for-web-pages` on NPM.
 
+## Enabling Qworum for your website
+
+By default this library (and the browser extension) will work as intended for [local development](https://qworum.net/en/developers/#local-development) only.
+
+In order to enable Qworum for your internet or intranet website, consider purchasing a [subscription](https://qworum.net/en/pricing/).
+
 ## License
 
-[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) ∎
+This software is released under the [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) license ∎
