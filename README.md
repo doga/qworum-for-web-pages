@@ -8,6 +8,10 @@ Using this library, web pages can communicate with the Qworum browser extension 
 - reading session data (such as reading the call arguments for the current service call),
 - writing session data.
 
+## Documentation
+
+The documentation for the latest version of this library is available [here](https://qworum.net/docs/qworum-for-web-pages/latest/).
+
 ## How to import this library into your frontend code
 
 This library is an ECMAScript module that does not have any dependencies. It can be imported in three ways:

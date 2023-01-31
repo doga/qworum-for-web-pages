@@ -1,6 +1,20 @@
 # Rakefile
 
-# Dependencies: jsdoc (`npm install -g jsdoc`)
+# This library on GitHub    : <https://github.com/doga/qworum-for-web-pages>
+# This library on NPM       : <https://www.npmjs.com/package/@qworum/qworum-for-web-pages>
+# This library on Skypack   : <https://cdn.skypack.dev/@qworum/qworum-for-web-pages>
+# On Skypack with versioning: <https://cdn.skypack.dev/@qworum/qworum-for-web-pages@1.0.9>
+# Docs for this library     : <https://qworum.net/docs/qworum-for-web-pages/latest/>
+
+# To publish this library on Skypack:
+# 1. Check Skypack compatibility by running `npm run skypack-check`
+# 2. Publish on NPM (`npm publish --access public`)
+# 3. Fetch the versioned Skypack URL with a browser or with curl. If Skypack hasn't cached the version yet,
+#    then it will look it up on NPM.
+
+# Dev dependencies: jsdoc (`npm install -g jsdoc`)
+
+# TODO Task for adding a new library version to the Skypack CDN.
 
 task default: :help
 
