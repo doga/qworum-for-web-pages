@@ -1,6 +1,6 @@
 {
   "include": [
-    "./esm/*.js"
+    "./build/qworum-for-web-pages.js"
   ],
   "compilerOptions": {
       "declaration": true,

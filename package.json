@@ -1,16 +1,16 @@
 {
   "name": "@qworum/qworum-for-web-pages",
-  "description": "Qworum JavaScript library for use inside web pages on web browsers.",
-  "version": "1.0.9",
+  "description": "Qworum JavaScript library for use inside web pages.",
+  "version": "1.0.10",
   "author": "Doğa Armangil <d.armangil@qworum.net>",
-  "module": "./esm/qworum-for-web-pages.js",
+  "module": "./build/qworum-for-web-pages.js",
   "exports": {
-    ".": "./esm/qworum-for-web-pages.js"
+    ".": "./build/qworum-for-web-pages.js"
   },
-  "types": "./esm/qworum-for-web-pages.d.ts",
+  "types": "./build/qworum-for-web-pages.d.ts",
   "files": [
-    "./esm/*.js",
-    "./esm/*.d.ts"
+    "./build/*.js",
+    "./build/*.d.ts"
   ],
   "keywords": [
     "qworum",
@@ -26,9 +26,7 @@
   "scripts": {
     "generate-docs" : "jsdoc --configure jsdoc.json --verbose",
     "create-types"  : "tsc",
-    "skypack-check" : "npx package-check",
-    "build"         : "npm run skypack-check && npm run create-types && npm run generate-docs && date",
-    "publish-to-npm": "npm publish --access public"
+    "skypack-check" : "npx package-check"
   },
   "devDependencies": {
     "@skypack/package-check": "^0.2.2",

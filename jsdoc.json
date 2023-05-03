@@ -1,7 +1,7 @@
 {
   "source": {
     "include": [
-      "./esm/qworum-for-web-pages.js"
+      "./build/qworum-for-web-pages.js"
     ],
     "includePattern": "(.mjs|.js)$",
     "excludePattern": "(node_modules/|docs)"
@@ -12,7 +12,7 @@
   "opts": {
     "encoding": "utf8",
     "readme": "./README.md",
-    "destination": "docs/",
+    "destination": "./build/docs/",
     "recurse": true,
     "verbose": true,
     "template": "./node_modules/jsdoc-fresh",

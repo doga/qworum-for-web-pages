@@ -25,30 +25,44 @@ end
 
 desc 'Build'
 task :build do
-    sh "npm run build"
+    # read the version string from package.json
+    require 'pathname'
+    require 'json'
+    package_file = Pathname.new './package.json'
+    package_info = JSON.parse package_file.read
+    version      = package_info['version']
+    puts "current version is #{version}"
+
+    # put the version string into the source code
+    source_file = Pathname.new './src/qworum-for-web-pages.js'
+    build_file = Pathname.new './build/qworum-for-web-pages.js'
+    build_file.write source_file.read.gsub('@@version', version)
+
+    # do the rest of the build
+    sh "npm run skypack-check && npm run create-types && npm run generate-docs && date"
 end
 
 desc 'Publish to NPM'
 task :publish do
-    sh "npm run publish-to-npm"
+    sh "npm publish --access public"
 end
 
-desc 'Build a TypeScript types file from JSdoc comments'
-task :types do
-    sh "npm run create-types" # .mjs extension not supported!!!
-    # sh "tsc --allowJs -d --emitDeclarationOnly qworum-for-web-pages.js" # .mjs extension not supported!!!
-end
+# desc 'Build a TypeScript types file from JSdoc comments'
+# task :create_types do
+#     sh "npm run create-types" # .mjs extension not supported!!!
+#     # sh "tsc --allowJs -d --emitDeclarationOnly qworum-for-web-pages.js" # .mjs extension not supported!!!
+# end
 
-desc 'Create the HTML documentation from JSdoc comments'
-task docs: [:clear_docs] do
-  sh "npm run generate-docs"
-  # sh "jsdoc #{tmpfile} -d docs --readme README.md" # default template (Google doesn't like it)
-end
+# desc 'Create the HTML documentation from JSdoc comments'
+# task generate_docs: [:clear_docs] do
+#   sh "npm run generate-docs"
+#   # sh "jsdoc #{tmpfile} -d docs --readme README.md" # default template (Google doesn't like it)
+# end
 
-desc 'Check Skypack.dev compatibility'
-task :skypack_check do
-  sh "npm run skypack-check"
-end
+# desc 'Check Skypack.dev compatibility'
+# task :skypack_check do
+#   sh "npm run skypack-check"
+# end
 
 desc 'Empty the docs directory'
 task :clear_docs do

@@ -2425,7 +2425,7 @@ class Qworum {
      * @static
      * @type {string}
      */
-    static version = '1.0.9';
+    static version = '@@version';
 
     /** 
      * A static array containing the Qworum instruction and data classes. 
@@ -2853,14 +2853,25 @@ class Qworum {
                 if (browserExtensionInfo.browserType === 'chrome') {
                     // TODO use async version of chrome.runtime.sendMessage by omitting the callback (https://developer.chrome.com/docs/extensions/reference/runtime/#method-sendMessage)
                     chrome.runtime.sendMessage( 
-                        browserExtensionInfo.extensionId,
+                        browserExtensionInfo.extensionIds[0],
                         message,
     
                         (response) => {
-                            if (!response) {
-                                reject(new Error('The Qworum extension is not installed or is disabled.')); return;
+                            if (response) {
+                                resolve(response); return;
                             }
-                            resolve(response);
+                            // official Qworum extension not available on browser; try the test version.
+                            chrome.runtime.sendMessage( 
+                                browserExtensionInfo.extensionIds[1],
+                                message,
+            
+                                (response) => {
+                                    if (response) {
+                                        resolve(response); return;
+                                    }
+                                    reject(new Error('The Qworum extension is not installed or is disabled.'));
+                                }
+                            );
                         }
                     );
                 } else {
@@ -2874,33 +2885,24 @@ class Qworum {
     }
 
     // Returns a non-null value if there is a Qworum extension for this browser.
-    // WARNING A non-null value does not mean that 1) the Qworum extension is installed on this browser, or that 2) the browser extension is enabled for this website !!!
+    // WARNING A non-null value does not mean that 1) the Qworum extension is installed on this browser, or that 2) the browser extension is enabled for this website in the extension manifest !!!
     static getBrowserExtensionInfo() {
-        // extension ids for all supported browsers
-        const 
-        isProductionMode = true,
-        // isProductionMode = false,
-        browserExtensionIds = {
-            // The following extension will be published on the Chrome Web Store (https://chrome.google.com/webstore/category/extensions).
-            // Browsers that support Chrome Web Store: Google Chrome, Microsoft Edge, Brave, Opera ...
-            chrome: isProductionMode ? (
-                // published version (available on Chrome Web Store)
-                'leaofcglebjeebmnmlapbnfbjgfiaokg'
-            ) : (
-                // local version
-                'iboekogiiknedkbpoohiaiejdjjbkaae'
-            ),
-        };
-
-        // extension info for this browser
-        let browserExtensionInfo = null, browserType = null;
+        let browserExtensionInfo = null;
         if (chrome && chrome.runtime && chrome.runtime.sendMessage) {
             // this browser is compatible with Chrome Web Store
-            browserType = 'chrome';
-            browserExtensionInfo = { browserType, extensionId: browserExtensionIds[browserType] };
+            browserExtensionInfo = { 
+                browserType: 'chrome',
+                extensionIds: [
+                    // published version (available on Chrome Web Store)
+                    'leaofcglebjeebmnmlapbnfbjgfiaokg',
+
+                    // local version for testing
+                    'iboekogiiknedkbpoohiaiejdjjbkaae'
+                ]
+            };
         }
-        if (!browserExtensionInfo) throw new Error('[Qworum for web pages] Browser not supported by this.');
-        this._log(`extension id: ${JSON.stringify(browserExtensionInfo)}`);
+        if (!browserExtensionInfo) throw new Error('[Qworum for web pages] Browser not supported.');
+        this._log(`extension info: ${JSON.stringify(browserExtensionInfo)}`);
         return browserExtensionInfo;
     }
 

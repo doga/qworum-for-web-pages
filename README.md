@@ -8,6 +8,10 @@ Using this library, web pages can communicate with the Qworum browser extension 
 - reading session data (such as reading the call arguments for the current service call),
 - writing session data.
 
+## How to build
+
+`rake build`
+
 ## Documentation
 
 The documentation for the latest version of this library is available [here](https://qworum.net/docs/qworum-for-web-pages/latest/).
