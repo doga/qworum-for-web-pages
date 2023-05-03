@@ -1,7 +1,7 @@
 {
   "name": "@qworum/qworum-for-web-pages",
   "description": "Qworum JavaScript library for use inside web pages.",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "Doğa Armangil <d.armangil@qworum.net>",
   "module": "./build/qworum-for-web-pages.js",
   "exports": {
