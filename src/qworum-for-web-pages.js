@@ -2679,6 +2679,7 @@ class Qworum {
             const 
             request  = {apiVersion, endpoint: 'Evaluate script', body: {xml: script.toXml()}},
             response = await this._sendRequest(request);
+            // console.debug('[Qworum for web pages - eval] request:',request);
             if (response.status.code !== 200) {
                 return Promise.reject(new Error(`API response was: ${response.status.code} ${response.status.message}`));
             }

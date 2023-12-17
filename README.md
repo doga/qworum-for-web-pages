@@ -20,7 +20,7 @@ The documentation for the latest version of this library is available [here](htt
 
 This library is an ECMAScript module that does not have any dependencies. It can be imported in three ways:
 
-- _(Recommended)_ Import from the Skypack CDN. Example: `import { Qworum } from "https://cdn.skypack.dev/@qworum/qworum-for-web-pages@1.0.11";`.
+- _(Recommended)_ Import from the ESM CDN. Example: `import { Qworum } from "https://esm.sh/@qworum/qworum-for-web-pages@1.0.11";`.
 - Import by copying [the `qworum-for-web-pages.js` file on GitHub](https://github.com/doga/qworum-for-web-pages/blob/master/esm/qworum-for-web-pages.js) into a local file. For example you can name your local copy `qworum-for-web-pages.mjs` and import it thusly: `import { Qworum } from "path/to/qworum-for-web-pages.mjs";`.
 - Use a bundler for importing from NPM. Search for `@qworum/qworum-for-web-pages` on NPM.
 
