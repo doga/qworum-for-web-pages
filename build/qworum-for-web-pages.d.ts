@@ -183,18 +183,26 @@ export class Qworum {
      * @function Qworum.SemanticData
      * @static
      * @param {string} value - The semantic data value.
-     * @param {(string | undefined)} type - The type of the semantic data value. One of 'json-ld', 'n-quads'.
+     * @param {(string | undefined)} type - The type of the semantic data value. One of 'trig', 'n-quads'.
      * @throws {Error}
      * @returns {Qworum.message.SemanticData}
      * @example
-     * const json = Qworum.SemanticData(`{
-     *   "@context"  : {"@vocab": "https://schema.org/"},
-     *   "@id"       : "https://www.wikidata.org/wiki/Q92760",
-     *   "@type"     : "Person",
-     *   "givenName" : "Claude",
-     *   "familyName": "Shannon",
-     *   "birthDate" : "1916-04-30"
-     * }`);
+     * const trig = Qworum.SemanticData(`
+     *   PREFIX : <https://schema.org/>
+     *
+     *   []
+     *   a :ItemList;
+     *   :itemListElement [
+     *     a :Product;
+     *     :productID "2";
+     *     :name "XYZ Boots";
+     *     :offers [
+     *       a :Offer;
+     *       :price "75.95";
+     *       :priceCurrency "EUR"
+     *     ]
+     *   ].
+     * `);
      * @see [Qworum specification](https://qworum.net/en/specification/v1/#semantic)
      */
     static SemanticData: any;
