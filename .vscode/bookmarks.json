@@ -1,16 +1,16 @@
 {
 	"files": [
 		{
-			"path": "src/qworum-for-web-pages.js",
+			"path": "mod.mjs",
 			"bookmarks": [
 				{
-					"line": 2363,
-					"column": 0,
+					"line": 2362,
+					"column": 9,
 					"label": ""
 				},
 				{
-					"line": 2420,
-					"column": 14,
+					"line": 2460,
+					"column": 5,
 					"label": ""
 				}
 			]
