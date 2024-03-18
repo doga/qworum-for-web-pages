@@ -4,7 +4,7 @@ This is [Qworum](https://qworum.net)'s official JavaScript library for web front
 
 ## Documentation
 
-The documentation for the latest version of this library is available [here](https://qworum.net/docs/qworum-for-web-pages/latest/).
+The documentation for the latest version of this library is available [here](https://qworum.net/docs/qworum-for-web-pages/latest/Qworum.html).
 
 ## How to import this library into your frontend code
 
