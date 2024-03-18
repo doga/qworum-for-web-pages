@@ -10,7 +10,7 @@ The documentation for the latest version of this library is available [here](htt
 
 This library is an ECMAScript module that does not have any dependencies. Importing this library is simple:
 
-- `import { Qworum } from "https://esm.sh/gh/da/qworum-for-web-pages@1.2.0/mod.mjs";`
+- `import { Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.2.0/mod.mjs";`
 
 ## Enabling Qworum for your website
 
