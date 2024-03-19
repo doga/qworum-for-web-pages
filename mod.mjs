@@ -1115,27 +1115,26 @@ class SemanticData extends GenericData {
         // value
         if (!(value instanceof N3.Store)) {
             if(typeof value !== 'string')throw new Error('Bad semantic data value');
-            const 
-            parser = new N3.Parser(),
-            store  = new N3.Store();
-
             let parsingError;
-            parser.parse(
-                value,
-                (error, quad, prefixes) => {
-                    if(parsingError)return;
-                    if(error){parsingError = ` ${error}`; return;}
-                    if(quad){
-                        store.add(quad);
-                    } else {
-                        this._prefixes = prefixes;
-                    }
+            const 
+            store  = new N3.Store(),
+            parser = new N3.Parser(),
+            parserCallback = (error, quad, prefixes) => {
+                if(parsingError)return;
+                if(error){parsingError = ` ${error}`; return;}
+                if(quad){
+                    console.debug(`adding ${quad}`);
+                    store.add(quad);
+                } else {
+                    this._prefixes = prefixes;
                 }
-            );
+            };
+
+            parser.parse(value, parserCallback);
             if(parsingError)throw new Error(`Error while parsing semantic data:${parsingError}`);
             value = store;
         }
-        this._value = store;
+        this._value = value;
     }
     get type() {
         return this._type;
