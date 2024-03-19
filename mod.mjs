@@ -5,6 +5,8 @@
  * @see <https://qworum.net>
  */
 
+import * as N3 from 'https://esm.sh/gh/doga/N3@1.17.2/mod.mjs';
+
 // Cross-browser JavaScript module for web pages.
 // Used for communicating with the browser's Qworum extension.
 // (I will make this available on GitHub.)
@@ -1097,18 +1099,43 @@ class SemanticData extends GenericData {
         'n-quads',
     ];
     _type;
-    _value;
+    _value; // N3.Store
+    _prefixes;
     static build(value, type) {
         return new SemanticData(value, type);
     }
     constructor(value, type){
         super();
-        this._value = value;
+        // type
         if (type == null || type == undefined || type.trim().length == 0) {
             type = SemanticData.dataTypes[0];
         }
         if (!SemanticData.dataTypes.includes(type)) throw new Error('Unknown semantic data type');
         this._type = type;
+        // value
+        if (!(value instanceof N3.Store)) {
+            if(typeof value !== 'string')throw new Error('Bad semantic data value');
+            const 
+            parser = new N3.Parser(),
+            store  = new N3.Store();
+
+            let parsingError;
+            parser.parse(
+                value,
+                (error, quad, prefixes) => {
+                    if(parsingError)return;
+                    if(error){parsingError = ` ${error}`; return;}
+                    if(quad){
+                        store.add(quad);
+                    } else {
+                        this._prefixes = prefixes;
+                    }
+                }
+            );
+            if(parsingError)throw new Error(`Error while parsing semantic data:${parsingError}`);
+            value = store;
+        }
+        this._value = store;
     }
     get type() {
         return this._type;
@@ -1116,8 +1143,18 @@ class SemanticData extends GenericData {
     get value() {
         return this._value;
     }
+    _toString(){
+        let res, format = 'Turtle';
+        if(this.type === 'trig')format = 'TriG';
+        if(this.type === 'n-triples')format = 'N-Triples';
+        if(this.type === 'n-quads')format = 'N-Quads';
+        const writer = new N3.Writer({ prefixes: this._prefixes, format });
+        for (const quad of this.value) writer.addQuad(quad);
+        writer.end((error, result) => res = result);
+        return res;
+    }
     toString() {
-        return `SemanticData(${this.value})`;
+        return `SemanticData(${this._toString()})`;
     }
     static fromXmlElement(element, namespaceStack) {
         const nsStack = namespaceStack || XmlNamespaceStack.forElement(element);
@@ -1158,11 +1195,18 @@ class SemanticData extends GenericData {
         throw new Error(errorMessage);
     }
     toXmlElement(namespaceStack) {
-        const namespace = GenericData.namespace.href, nsStack = namespaceStack || new XmlNamespaceStack(), existingPrefix = nsStack.prefixFor(namespace, null), useNewPrefix = typeof existingPrefix !== 'string', newPrefix = useNewPrefix ? nsStack.prefixFor(namespace, [
-            'd'
-        ]) : null, prefix = newPrefix || existingPrefix, attributes = Object.create(null), children = [
-            new XmlText(JSON.stringify(this.value))
-        ], name = XmlNamespaceStack.elementName(SemanticData.tag, prefix), element = new XmlElement(name, attributes, children);
+        const 
+        namespace      = GenericData.namespace.href, 
+        nsStack        = namespaceStack || new XmlNamespaceStack(), 
+        existingPrefix = nsStack.prefixFor(namespace, null), 
+        useNewPrefix   = typeof existingPrefix !== 'string', 
+        newPrefix      = useNewPrefix ? nsStack.prefixFor(namespace, ['d']) : null, 
+        prefix         = newPrefix || existingPrefix, 
+        attributes     = Object.create(null), 
+        children       = [new XmlText(this._toString())], 
+        name           = XmlNamespaceStack.elementName(SemanticData.tag, prefix), 
+        element        = new XmlElement(name, attributes, children);
+
         attributes['type'] = this.type;
         if (useNewPrefix) {
             attributes[XmlNamespaceStack.nsAttrName(newPrefix)] = namespace;
@@ -1185,7 +1229,7 @@ class SemanticData extends GenericData {
             type: `${SemanticData.namespace} ${SemanticData.tag}`,
             value: {
                 type: this.type,
-                text: this.value
+                text: this._toString()
             }
         };
     }
