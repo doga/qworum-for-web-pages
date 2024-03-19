@@ -1101,46 +1101,71 @@ class SemanticData extends GenericData {
     _type;
     _value; // N3.Store
     _prefixes;
-    static build(value, type) {
-        return new SemanticData(value, type);
-    }
-    constructor(value, type){
-        super();
-        // type
-        if (type == null || type == undefined || type.trim().length == 0) {
-            type = SemanticData.dataTypes[0];
-        }
-        if (!SemanticData.dataTypes.includes(type)) throw new Error('Unknown semantic data type');
-        this._type = type;
-        // value
-        if (!(value instanceof N3.Store)) {
-            if(typeof value !== 'string')throw new Error('Bad semantic data value');
-            let parsingError;
-            const 
-            store  = new N3.Store(),
-            parser = new N3.Parser(),
-            parserCallback = (error, quad, prefixes) => {
-                if(parsingError)return;
-                if(error){parsingError = ` ${error}`; return;}
-                if(quad){
-                    // console.debug(`adding ${quad}`);
-                    store.add(quad);
-                } else {
-                    this._prefixes = prefixes;
-                }
-            };
 
-            parser.parse(value, parserCallback);
-            if(parsingError)throw new Error(`Error while parsing semantic data:${parsingError}`);
-            value = store;
-        }
+    /**
+     * Async semantic data builder.
+     * @async
+     * @param {(string|N3.Store)} value - the RDF data
+     * @param {(string|null|undefined)} type - RDF format identifier
+     * @param {({string:string}|null|undefined)} prefixes - RDF named node prefixes and the corresponding namespace IRIs. This is ignored if `value` is a string.
+     * @throws {Error}
+     * @returns {SemanticData}
+     */
+    static async build(value, type, prefixes) {
+        return new Promise((resolve, reject) => {
+            // type
+            if (type == null || type == undefined || type.trim().length == 0) {
+                type = SemanticData.dataTypes[0];
+            }
+            if (!SemanticData.dataTypes.includes(type)) {
+                reject(new Error('Unknown semantic data type'));
+                return;
+            }
+            // value
+            if (!(value instanceof N3.Store)) {
+                if(typeof value !== 'string'){
+                    reject(new Error('Bad semantic data value'));
+                    return;
+                }
+                let parsingError;
+                const 
+                store  = new N3.Store(),
+                parser = new N3.Parser(),
+                parserCallback = (error, quad, prefixes) => {
+                    if(parsingError)return;
+                    if(error){
+                        parsingError = ` ${error}`;
+                        reject(new Error(`Error while parsing semantic data:${parsingError}`));
+                        return;
+                    }
+                    if(quad){
+                        // console.debug(`adding ${quad}`);
+                        store.add(quad);
+                    } else {
+                        value = store;
+                        resolve(new SemanticData(value, type, prefixes));
+                    }
+                };
+                parser.parse(value, parserCallback);
+            }
+        });
+    }
+    constructor(value, type, prefixes){
+        super();
+        if(!SemanticData.dataTypes.includes(type))throw new Error(`Unknown semantic data type`);
+        if(!(value instanceof N3.Store))throw new Error(`Value is not a store`);
+        this._type = type;
         this._value = value;
+        this._prefixes = prefixes;
     }
     get type() {
         return this._type;
     }
     get value() {
         return this._value;
+    }
+    get prefixes() {
+        return this._prefixes;
     }
     _toString(){
         let res, format = 'Turtle';
@@ -2681,7 +2706,7 @@ class Qworum {
     static Json = Qworum.message.Json.build;
 
     /** 
-     * 📝 Builder for [semantic data values](https://qworum.net/en/specification/v1/#semantic). 
+     * 📝 Async builder for [semantic data values](https://qworum.net/en/specification/v1/#semantic). 
      * @function Qworum.SemanticData
      * @static
      * @param {string} value - The semantic data value.
