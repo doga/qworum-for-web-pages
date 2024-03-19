@@ -1092,8 +1092,9 @@ class SemanticData extends GenericData {
     static dataTypes = [
         'turtle',
         'trig',
-        'json-ld',
-        'n-quads'
+        // 'json-ld', 
+        'n-triples',
+        'n-quads',
     ];
     _type;
     _value;
@@ -2641,7 +2642,7 @@ class Qworum {
      * @function Qworum.SemanticData
      * @static
      * @param {string} value - The semantic data value.
-     * @param {(string | undefined)} type - The type of the semantic data value. One of 'turtle', 'trig', 'json-ld', 'n-quads'. Default is 'turtle'.
+     * @param {(string | undefined)} type - The type of the semantic data value. One of 'turtle', 'trig', 'n-triples', 'n-quads'. Default is 'turtle'.
      * @throws {Error}
      * @returns {Qworum.message.SemanticData}
      * @see [Qworum specification](https://qworum.net/en/specification/v1/#semantic)
