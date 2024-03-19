@@ -1123,7 +1123,7 @@ class SemanticData extends GenericData {
                 if(parsingError)return;
                 if(error){parsingError = ` ${error}`; return;}
                 if(quad){
-                    console.debug(`adding ${quad}`);
+                    // console.debug(`adding ${quad}`);
                     store.add(quad);
                 } else {
                     this._prefixes = prefixes;
@@ -2508,7 +2508,7 @@ class Qworum {
      * @static
      * @type {string}
      */
-    static version = '1.2.0';
+    static version = '1.3.3';
 
     /** 
      * Classes representing Qworum instructions and Qworum data. 
