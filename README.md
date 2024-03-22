@@ -26,6 +26,7 @@ _Tip (requires Deno): Run the following example by typing this in your terminal:
 deno run \
   --allow-net --allow-run --allow-env --allow-read \
   https://deno.land/x/mdrb/mod.ts \
+  --dax=false --mode=isolated \
   https://raw.githubusercontent.com/doga/object-semantic-mapping/main/README.md
 ```
 
@@ -40,24 +41,86 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript, Qworum } from "./mod.mjs";
+import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.4.0/mod.mjs";
 const script = 
-Qworum.Script(
-  Qworum.Sequence(
+QworumScript.Script.build(
+  QworumScript.Sequence.build(
     // Show the user's shopping cart
-    Qworum.Call(["@", "shopping cart"], "https://shopping-cart.example/view/"),
+    QworumScript.Call.build(["@", "shopping cart"], "https://shopping-cart.example/view/"),
 
     // Go back to the current e-shop
-    Qworum.Goto("/home/")
+    QworumScript.Goto.build("/home/")
   )
 );
-console.info(`Script in XML: ${script.toXml()}`);
+console.info(`Script in XML format:\n${script.toXml()}`);
 ```
 
 Sample output for the code above:
 
 ```text
+Script in XML:
+<q:sequence xmlns:q="https://qworum.net/ns/v1/instruction/"><q:call object="[&quot;@&quot;,&quot;shopping cart&quot;]" href="https://shopping-cart.example/view/"></q:call><q:goto href="/home/"></q:goto></q:sequence>
+```
 
+<details data-mdrb>
+<summary>Generate an semantic data container, fill it with Turtle files, and print out as Turtle.</summary>
+
+<pre>
+description = '''
+Running this example is safe, it will not read or write anything to your filesystem.
+'''
+</pre>
+</details>
+
+```javascript
+import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.4.0/mod.mjs";
+const
+sd = new QworumScript.SemanticData(),
+turtle = [
+  `
+  BASE <https://qworum.net/data/org.ttl>
+  PREFIX : <#>
+  PREFIX foaf: <http://xmlns.com/foaf/0.1/>            # https://en.wikipedia.org/wiki/FOAF 
+  PREFIX dcterms: <http://purl.org/dc/terms/>          # https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
+  PREFIX cc: <http://creativecommons.org/ns#>
+  PREFIX schema: <https://schema.org/>
+
+  <org.ttl>
+    a foaf:Document;
+    dcterms:description 'Organisation description.'@en;
+    foaf:maker :DoğaArmangil;
+    foaf:primaryTopic :id;
+    cc:license <license/content.ttl#non-commercial>;
+    a schema:CreativeWork;
+    schema:encodingFormat
+      'text/turtle',
+      <https://www.iana.org/assignments/media-types/text/turtle>.
+  `,
+
+  `
+  BASE <https://qworum.net/data/org.ttl>
+  PREFIX : <#>
+  PREFIX org: <http://www.w3.org/ns/org#>              # https://www.w3.org/TR/vocab-org/ 
+
+  :id
+    a org:Organization;
+    org:purpose    
+      'Qworum is a provider of enterprise infrastructure software, with the overarching goal of making the web a fully fledged platform for applications.'@en;
+    org:Site <locations.ttl#geneva>.
+  `,
+]
+console.debug(`𝑹𝑬𝑨𝑫𝑰𝑵𝑮 𝑻𝑼𝑹𝑻𝑳𝑬 𝑪𝑶𝑵𝑻𝑬𝑵𝑻:\n${turtle[0]}`);
+await sd.readFromText(turtle[0]);
+console.debug(`\n𝑹𝑬𝑨𝑫𝑰𝑵𝑮 𝑻𝑼𝑹𝑻𝑳𝑬 𝑪𝑶𝑵𝑻𝑬𝑵𝑻:\n${turtle[1]}`);
+await sd.readFromText(turtle[1]);
+console.info(`\n𝑼𝑵𝑰𝑶𝑵 𝑶𝑭 𝑨𝑳𝑳 𝑹𝑬𝑨𝑫 𝑫𝑨𝑻𝑨, 𝑰𝑵 𝑻𝑼𝑹𝑻𝑳𝑬 𝑭𝑶𝑹𝑴𝑨𝑻:\n${sd.toRawString()}`);
+```
+
+Sample output for the code above:
+
+```text
+Script in XML:
+<q:sequence xmlns:q="https://qworum.net/ns/v1/instruction/"><q:call object="[&quot;@&quot;,&quot;shopping cart&quot;]" href="https://shopping-cart.example/view/"></q:call><q:goto href="/home/"></q:goto></q:sequence>
 ```
 
 ∎
