@@ -27,7 +27,7 @@ deno run \
   --allow-net --allow-run --allow-env --allow-read \
   https://deno.land/x/mdrb/mod.ts \
   --dax=false --mode=isolated \
-  https://raw.githubusercontent.com/doga/object-semantic-mapping/main/README.md
+  https://raw.githubusercontent.com/doga/qworum-for-web-pages/main/README.md
 ```
 
 <details data-mdrb>
