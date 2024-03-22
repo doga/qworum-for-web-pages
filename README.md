@@ -119,8 +119,57 @@ console.info(`\n𝑼𝑵𝑰𝑶𝑵 𝑶𝑭 𝑨𝑳𝑳 𝑹𝑬𝑨𝑫 𝑫
 Sample output for the code above:
 
 ```text
-Script in XML:
-<q:sequence xmlns:q="https://qworum.net/ns/v1/instruction/"><q:call object="[&quot;@&quot;,&quot;shopping cart&quot;]" href="https://shopping-cart.example/view/"></q:call><q:goto href="/home/"></q:goto></q:sequence>
+𝑹𝑬𝑨𝑫𝑰𝑵𝑮 𝑻𝑼𝑹𝑻𝑳𝑬 𝑪𝑶𝑵𝑻𝑬𝑵𝑻:
+
+  BASE <https://qworum.net/data/org.ttl>
+  PREFIX : <#>
+  PREFIX foaf: <http://xmlns.com/foaf/0.1/>            # https://en.wikipedia.org/wiki/FOAF
+  PREFIX dcterms: <http://purl.org/dc/terms/>          # https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
+  PREFIX cc: <http://creativecommons.org/ns#>
+  PREFIX schema: <https://schema.org/>
+
+  <org.ttl>
+    a foaf:Document;
+    dcterms:description 'Organisation description.'@en;
+    foaf:maker :DoğaArmangil;
+    foaf:primaryTopic :id;
+    cc:license <license/content.ttl#non-commercial>;
+    a schema:CreativeWork;
+    schema:encodingFormat
+      'text/turtle',
+      <https://www.iana.org/assignments/media-types/text/turtle>.
+
+
+𝑹𝑬𝑨𝑫𝑰𝑵𝑮 𝑻𝑼𝑹𝑻𝑳𝑬 𝑪𝑶𝑵𝑻𝑬𝑵𝑻:
+
+  BASE <https://qworum.net/data/org.ttl>
+  PREFIX : <#>
+  PREFIX org: <http://www.w3.org/ns/org#>              # https://www.w3.org/TR/vocab-org/
+
+  :id
+    a org:Organization;
+    org:purpose
+      'Qworum is a provider of enterprise infrastructure software, with the overarching goal of making the web a fully fledged platform for applications.'@en;
+    org:Site <locations.ttl#geneva>.
+
+
+𝑼𝑵𝑰𝑶𝑵 𝑶𝑭 𝑨𝑳𝑳 𝑹𝑬𝑨𝑫 𝑫𝑨𝑻𝑨, 𝑰𝑵 𝑻𝑼𝑹𝑻𝑳𝑬 𝑭𝑶𝑹𝑴𝑨𝑻:
+@prefix : <https://qworum.net/data/org.ttl#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix cc: <http://creativecommons.org/ns#>.
+@prefix schema: <https://schema.org/>.
+@prefix org: <http://www.w3.org/ns/org#>.
+
+<https://qworum.net/data/org.ttl> a foaf:Document, schema:CreativeWork;
+    dcterms:description "Organisation description."@en;
+    foaf:maker <https://qworum.net/data/org.ttl#DoğaArmangil>;
+    foaf:primaryTopic :id;
+    cc:license <https://qworum.net/data/license/content.ttl#non-commercial>;
+    schema:encodingFormat "text/turtle", <https://www.iana.org/assignments/media-types/text/turtle>.
+:id a org:Organization;
+    org:purpose "Qworum is a provider of enterprise infrastructure software, with the overarching goal of making the web a fully fledged platform for applications."@en;
+    org:Site <https://qworum.net/data/locations.ttl#geneva>.
 ```
 
 ∎
