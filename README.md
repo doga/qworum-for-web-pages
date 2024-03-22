@@ -10,7 +10,7 @@ The documentation for the latest version of this library is available [here](htt
 
 This library is an ECMAScript module that does not have any dependencies. Importing this library is simple:
 
-- `import { Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.3.5/mod.mjs";`
+- `import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.4.0/mod.mjs";`
 
 ## Enabling Qworum for your website
 
@@ -18,6 +18,46 @@ By default this library (and the browser extension) will work as intended for [l
 
 Enabling Qworum for your internet or intranet website requires a [subscription](https://qworum.net/en/plans/).
 
-## License
+## Usage
 
-This software is released under the [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) license ∎
+_Tip (requires Deno): Run the following example by typing this in your terminal:_
+
+```shell
+deno run \
+  --allow-net --allow-run --allow-env --allow-read \
+  https://deno.land/x/mdrb/mod.ts \
+  https://raw.githubusercontent.com/doga/object-semantic-mapping/main/README.md
+```
+
+<details data-mdrb>
+<summary>Generate a Qworum script in-memory, and print it out as XML.</summary>
+
+<pre>
+description = '''
+Running this example is safe, it will not read or write anything to your filesystem.
+'''
+</pre>
+</details>
+
+```javascript
+import { QworumScript, Qworum } from "./mod.mjs";
+const script = 
+Qworum.Script(
+  Qworum.Sequence(
+    // Show the user's shopping cart
+    Qworum.Call(["@", "shopping cart"], "https://shopping-cart.example/view/"),
+
+    // Go back to the current e-shop
+    Qworum.Goto("/home/")
+  )
+);
+console.info(`Script in XML: ${script.toXml()}`);
+```
+
+Sample output for the code above:
+
+```text
+
+```
+
+∎
