@@ -22,7 +22,7 @@ Enabling Qworum for your internet or intranet website requires a [subscription](
 
 ## Usage
 
-_Tip (requires Deno): Run the following example by typing this in your terminal:_
+_Tip: Run the examples below by typing this in your terminal (requires Deno):_
 
 ```shell
 deno run \
