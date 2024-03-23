@@ -41,7 +41,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.4.0/mod.mjs";
+import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.4.1/mod.mjs";
 const script = 
 QworumScript.Script.build(
   QworumScript.Sequence.build(
