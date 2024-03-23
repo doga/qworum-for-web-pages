@@ -1,3 +1,5 @@
+![Qworum logo and name](https://raw.githubusercontent.com/doga/qworum-website/master/build/assets/images/logos/Qworum-logo-and-name.svg "Qworum logo and name")
+
 # Qworum for web pages
 
 This is [Qworum](https://qworum.net)'s official JavaScript library for web frontends.
