@@ -12,7 +12,7 @@ The documentation for the latest version of this library is available [here](htt
 
 This library is an ECMAScript module that does not have any dependencies. Importing this library is simple:
 
-- `import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.4.11/mod.mjs";`
+- `import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.0/mod.mjs";`
 
 ## Enabling Qworum for your website
 
@@ -43,7 +43,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.4.11/mod.mjs";
+import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.0/mod.mjs";
 const script = 
 QworumScript.Script.build(
   QworumScript.Sequence.build(
@@ -75,7 +75,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.4.11/mod.mjs";
+import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.0/mod.mjs";
 const
 sd = new QworumScript.SemanticData(),
 turtle = [
@@ -115,7 +115,7 @@ console.debug(`𝑹𝑬𝑨𝑫𝑰𝑵𝑮 𝑻𝑼𝑹𝑻𝑳𝑬 𝑪𝑶�
 await sd.readFromText(turtle[0]);
 console.debug(`\n𝑹𝑬𝑨𝑫𝑰𝑵𝑮 𝑻𝑼𝑹𝑻𝑳𝑬 𝑪𝑶𝑵𝑻𝑬𝑵𝑻:\n${turtle[1]}`);
 await sd.readFromText(turtle[1]);
-console.info(`\n𝑼𝑵𝑰𝑶𝑵 𝑶𝑭 𝑨𝑳𝑳 𝑹𝑬𝑨𝑫 𝑫𝑨𝑻𝑨, 𝑰𝑵 𝑻𝑼𝑹𝑻𝑳𝑬 𝑭𝑶𝑹𝑴𝑨𝑻:\n${sd.toString()}`);
+console.info(`\n𝑼𝑵𝑰𝑶𝑵 𝑶𝑭 𝑨𝑳𝑳 𝑹𝑬𝑨𝑫 𝑫𝑨𝑻𝑨, 𝑰𝑵 𝑻𝑹𝑰𝑮 𝑭𝑶𝑹𝑴𝑨𝑻:\n${sd.toString()}`);
 ```
 
 Sample output for the code above:
