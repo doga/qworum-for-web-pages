@@ -12,7 +12,7 @@ The documentation for the latest version of this library is available [here](htt
 
 This library is an ECMAScript module that does not have any dependencies. Importing this library is simple:
 
-- `import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.0/mod.mjs";`
+- `import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.3/mod.mjs";`
 
 ## Enabling Qworum for your website
 
@@ -43,7 +43,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.0/mod.mjs";
+import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.3/mod.mjs";
 const script = 
 QworumScript.Script.build(
   QworumScript.Sequence.build(
@@ -55,6 +55,8 @@ QworumScript.Script.build(
   )
 );
 console.info(`Script in XML format:\n${script.toXml()}`);
+console.info(`typeof console.info: ${typeof console.info}`);
+console.info(`SemanticData tag:${QworumScript.SemanticData.build().getTag()}`);
 ```
 
 Sample output for the code above:
@@ -75,7 +77,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.0/mod.mjs";
+import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.3/mod.mjs";
 const
 sd = new QworumScript.SemanticData(),
 turtle = [
