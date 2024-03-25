@@ -54,9 +54,6 @@ QworumScript.Script.build(
     QworumScript.Goto.build("/home/")
   )
 );
-console.info(`Script in XML format:\n${script.toXml()}`);
-console.info(`typeof console.info: ${typeof console.info}`);
-console.info(`SemanticData tag:${QworumScript.SemanticData.build().getTag()}`);
 ```
 
 Sample output for the code above:
