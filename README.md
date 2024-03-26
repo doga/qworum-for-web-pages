@@ -44,16 +44,17 @@ Running this example is safe, it will not read or write anything to your filesys
 
 ```javascript
 import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.3/mod.mjs";
-const script = 
-QworumScript.Script.build(
+
+const script = QworumScript.Script.build(
   QworumScript.Sequence.build(
     // Show the user's shopping cart
     QworumScript.Call.build(["@", "shopping cart"], "https://shopping-cart.example/view/"),
 
-    // Go back to the current e-shop
+    // Go back to the online shop
     QworumScript.Goto.build("/home/")
   )
 );
+console.info(`Script in XML:\n${script.toXml()}`);
 ```
 
 Sample output for the code above:
@@ -75,6 +76,7 @@ Running this example is safe, it will not read or write anything to your filesys
 
 ```javascript
 import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.3/mod.mjs";
+
 const
 sd = new QworumScript.SemanticData(),
 turtle = [
