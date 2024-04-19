@@ -33,7 +33,7 @@ deno run \
 ```
 
 <details data-mdrb>
-<summary>Generate a Qworum script in-memory, and print it out as XML.</summary>
+<summary>Generate a Qworum script in-memory, and print out a human-readable description.</summary>
 
 <pre>
 description = '''
@@ -43,7 +43,8 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.7/mod.mjs";
+import { QworumScript } from "./mod.mjs";
+// import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.7/mod.mjs";
 
 const script = QworumScript.Script.build(
   QworumScript.Sequence.build(
@@ -54,14 +55,13 @@ const script = QworumScript.Script.build(
     QworumScript.Goto.build("/home/")
   )
 );
-console.info(`Script in XML:\n${script.toXml()}`);
+console.info(`${script}`);
 ```
 
 Sample output for the code above:
 
 ```text
-Script in XML:
-<q:sequence xmlns:q="https://qworum.net/ns/v1/instruction/"><q:call object="[&quot;@&quot;,&quot;shopping cart&quot;]" href="https://shopping-cart.example/view/"></q:call><q:goto href="/home/"></q:goto></q:sequence>
+
 ```
 
 <details data-mdrb>
@@ -75,13 +75,13 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.7/mod.mjs";
+import { QworumScript } from "./mod.mjs";
+// import { QworumScript } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.5.7/mod.mjs";
 
 const
 sd = new QworumScript.SemanticData(),
 turtle = [
   `
-  BASE <https://qworum.net/data/org.ttl>
   PREFIX : <#>
   PREFIX foaf: <http://xmlns.com/foaf/0.1/>            # https://en.wikipedia.org/wiki/FOAF 
   PREFIX dcterms: <http://purl.org/dc/terms/>          # https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
@@ -101,7 +101,6 @@ turtle = [
   `,
 
   `
-  BASE <https://qworum.net/data/org.ttl>
   PREFIX : <#>
   PREFIX org: <http://www.w3.org/ns/org#>              # https://www.w3.org/TR/vocab-org/ 
 
@@ -113,9 +112,9 @@ turtle = [
   `,
 ]
 console.debug(`𝑹𝑬𝑨𝑫𝑰𝑵𝑮 𝑻𝑼𝑹𝑻𝑳𝑬 𝑪𝑶𝑵𝑻𝑬𝑵𝑻:\n${turtle[0]}`);
-await sd.readFromText(turtle[0]);
+await sd.readFromText(turtle[0], new URL('https://site.example/'));
 console.debug(`\n𝑹𝑬𝑨𝑫𝑰𝑵𝑮 𝑻𝑼𝑹𝑻𝑳𝑬 𝑪𝑶𝑵𝑻𝑬𝑵𝑻:\n${turtle[1]}`);
-await sd.readFromText(turtle[1]);
+await sd.readFromText(turtle[1], new URL('https://site2.example/'));
 console.info(`\n𝑼𝑵𝑰𝑶𝑵 𝑶𝑭 𝑨𝑳𝑳 𝑹𝑬𝑨𝑫 𝑫𝑨𝑻𝑨, 𝑰𝑵 𝑻𝑹𝑰𝑮 𝑭𝑶𝑹𝑴𝑨𝑻:\n${sd.toString()}`);
 ```
 
@@ -174,12 +173,6 @@ Sample output for the code above:
     org:purpose "Qworum is a provider of enterprise infrastructure software, with the overarching goal of making the web a fully fledged platform for applications."@en;
     org:Site <https://qworum.net/data/locations.ttl#geneva>.
 ```
-
-## Voucher
-
-[![Qworum promo code](https://github.com/doga/doga/raw/main/qworum-promo-code-QRMSYY4IJCyNZ.png)](https://qworum.net/en/plans/)
-
-_Promo code: QRMSYY4IJCyNZ_
 
 ## License
 
