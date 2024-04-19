@@ -5,12 +5,9 @@
  * @see <https://qworum.net>
  */
 
-import { N3 } from "./imports.mjs";
-import * as QworumScript from "./lib/qworum-script.mjs";
-import { Qworum } from "./lib/qworum.mjs";
-import { I18nString } from "./lib/semantic/i18n-string.mjs";
-import { Model } from "./lib/semantic/model.mjs";
+export * as QworumScript from "./lib/qworum-script.mjs";
+export { Qworum } from "./lib/qworum.mjs";
 
 export {
-  N3, QworumScript, Qworum, I18nString, Model,
+  QworumScript, Qworum
 };
