@@ -23,12 +23,7 @@ Activating Qworum for a website requires a [subscription](https://qworum.net/en/
 _Tip: Run the examples below by typing this in your terminal (requires Deno):_
 
 ```shell
-deno run \
-  --allow-net --allow-run --allow-env --allow-read \
-  --location https://site.example/a/page.html \ 
-  https://deno.land/x/mdrb@2.0.0/mod.ts \
-  --dax=false --mode=isolated \
-  https://raw.githubusercontent.com/doga/qworum-for-web-pages/master/README.md
+deno run --allow-net --allow-run --allow-env --allow-read --location https://site.example/a/page.html https://deno.land/x/mdrb@2.0.0/mod.ts --dax=false --mode=isolated https://raw.githubusercontent.com/doga/qworum-for-web-pages/master/README.md
 ```
 
 <details data-mdrb>
@@ -42,7 +37,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.6.0/mod.mjs";
+import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.0/mod.mjs';
 
 const
 Script   = QworumScript.Script.build,
@@ -51,9 +46,8 @@ Call     = QworumScript.Call.build,
 Goto     = QworumScript.Goto.build,
 script   = Script(
   Sequence(
-    // Show the user's shopping cart
-    Call(["@", "shopping cart"], "https://shopping-cart.example/view/"),
-    Goto("/home/") // Go back to the online shop
+    Call(['@', 'shopping cart'], 'https://shopping-cart.example/view/'),
+    Goto("/home/")
   )
 );
 
@@ -78,7 +72,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { SemanticData } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.6.0/mod.mjs";
+import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.0/mod.mjs';
 
 const org = new SemanticData();
 
