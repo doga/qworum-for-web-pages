@@ -8,6 +8,10 @@ This is [Qworum](https://qworum.net)'s official JavaScript library for web front
 
 The documentation for the latest version of this library is available [here](https://qworum.net/docs/qworum-for-web-pages/latest/Qworum.html).
 
+## Some projects that are using this library
+
+[Template for a Qworum application that uses RDF data](https://github.com/doga/qworum-application-template-with-semantic-data).
+
 ## How to import this library in a web page
 
 `import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.6.5/mod.mjs";`
