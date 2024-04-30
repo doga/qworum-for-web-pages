@@ -14,7 +14,7 @@ The documentation for the latest version of this library is available [here](htt
 
 ## How to import this library in a web page
 
-`import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.6.5/mod.mjs";`
+`import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.6.8/mod.mjs";`
 
 ## Activating Qworum for a website
 
@@ -41,7 +41,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.5/mod.mjs';
+import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.8/mod.mjs';
 
 const
 Script   = QworumScript.Script.build,
@@ -76,7 +76,7 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.5/mod.mjs';
+import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.8/mod.mjs';
 
 const org = new SemanticData();
 
