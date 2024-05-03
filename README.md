@@ -31,7 +31,7 @@ deno run --allow-net --allow-run --allow-env --allow-read --location https://sit
 ```
 
 <details data-mdrb>
-<summary>Generate a Qworum script in-memory. (In a browser the Qworum extension would run the Qworum script.)</summary>
+<summary>Generate a Qworum script in-memory.</summary>
 
 <pre>
 description = '''
@@ -41,7 +41,8 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.8/mod.mjs';
+import { QworumScript, Qworum } from './mod.mjs';
+// import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.8/mod.mjs';
 
 const
 Script   = QworumScript.Script.build,
@@ -55,8 +56,10 @@ script   = Script(
   )
 );
 
-// await Qworum.eval(script);
 console.info(`${script}`);
+
+// In a browser the Qworum extension would run the Qworum script.
+// await Qworum.eval(script);
 ```
 
 Sample output for the code above:
@@ -66,7 +69,7 @@ Sequence(Call(object: [@, shopping cart], href: https://shopping-cart.example/vi
 ```
 
 <details data-mdrb>
-<summary>Create semantic data sourced from a Turtle file. (In a browser the Qworum extension could store this as session data.)</summary>
+<summary>Create semantic data sourced from a Turtle file.</summary>
 
 <pre>
 description = '''
@@ -76,14 +79,17 @@ Running this example is safe, it will not read or write anything to your filesys
 </details>
 
 ```javascript
-import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.8/mod.mjs';
+import { SemanticData, Qworum } from './mod.mjs';
+// import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.8/mod.mjs';
 
 const org = new SemanticData();
 
 await org.readFromUrl(new URL('https://qworum.net/data/org.ttl'));
 
-// await Qworum.setData('Organisation', org);
 console.info(`${org}`);
+
+// In a browser the Qworum extension could store this as session data.
+// await Qworum.setData('Organisation', org);
 ```
 
 Sample output for the code above:
@@ -95,6 +101,43 @@ SemanticData(
       <http://www.w3.org/ns/org#purpose> "Qworum is a provider of enterprise infrastructure software, with the overarching goal of making the web a fully fledged platform for applications."@en;
   …
 )
+```
+
+<details data-mdrb>
+<summary>Qworum scripts must not contain platform faults.</summary>
+
+<pre>
+description = '''
+Running this example is safe, it will not read or write anything to your filesystem.
+'''
+</pre>
+</details>
+
+```javascript
+import { QworumScript, Qworum } from './mod.mjs';
+// import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.6.8/mod.mjs';
+
+const
+Script     = QworumScript.Script.build,
+Fault      = QworumScript.Fault.build,
+faultTypes = ['* entitlement', 'payment cancelled', null];
+
+for(const faultType of faultTypes){
+  try{
+    const script = Script(Fault(faultType));
+    console.info(`${script}`);
+  }catch(error){
+    console.error(`${error}`);
+  }
+}
+```
+
+Sample output for the code above:
+
+```text
+TypeError: not a service-specific fault: '* entitlement'
+Fault(type: payment cancelled)
+Fault(type: * service-specific)
 ```
 
 ## License

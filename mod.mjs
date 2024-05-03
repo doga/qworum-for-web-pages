@@ -14,9 +14,6 @@ export {
   Instruction, 
   Return, Sequence, Data, Try, Goto, Call, Script,
   Fault, 
-  PlatformFaultTypeError, PlatformFault, 
-
-  FaultTypeError,
 } from "./lib/qworum-script.mjs";
 
 export { Qworum } from "./lib/qworum.mjs";
