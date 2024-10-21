@@ -24,10 +24,14 @@ Activating Qworum for a website requires a [subscription](https://qworum.net/en/
 
 ## Usage
 
-_Tip: Run the examples below by typing this in your terminal (requires Deno):_
+_Tip: Run the examples below by typing this in your terminal (requires [Deno](https://deno.com/) 2+):_
 
 ```shell
-deno run --allow-net --allow-run --allow-env --allow-read --location https://site.example/a/page.html https://deno.land/x/mdrb@2.0.0/mod.ts --dax=false --mode=isolated https://raw.githubusercontent.com/doga/qworum-for-web-pages/master/README.md
+deno run \
+  --allow-net --allow-run --allow-env --allow-read \
+  jsr:@andrewbrey/mdrb@3.0.4 \
+  --dax=false \
+  https://raw.githubusercontent.com/doga/qworum-for-web-pages/master/README.md
 ```
 
 <details data-mdrb>
@@ -35,7 +39,7 @@ deno run --allow-net --allow-run --allow-env --allow-read --location https://sit
 
 <pre>
 description = '''
-Running this example is safe, it will not read or write anything to your filesystem.
+Running this code is safe.
 '''
 </pre>
 </details>
@@ -72,7 +76,7 @@ Sequence(Call(object: [@, shopping cart], href: https://shopping-cart.example/vi
 
 <pre>
 description = '''
-Running this example is safe, it will not read or write anything to your filesystem.
+Running this code is safe.
 '''
 </pre>
 </details>
@@ -106,7 +110,7 @@ SemanticData(
 
 <pre>
 description = '''
-Running this example is safe, it will not read or write anything to your filesystem.
+Running this code is safe.
 '''
 </pre>
 </details>
