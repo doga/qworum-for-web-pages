@@ -22,6 +22,23 @@ Qworum provides advanced browser capabilities through a browser extension.
 By default Qworum is actived for [local development](https://qworum.net/en/developers/#local-development) only.
 Activating Qworum for a website requires a [subscription](https://qworum.net/en/plans/).
 
+## Classes
+
+```mermaid
+---
+title: Classes
+---
+classDiagram
+
+class Qworum{
+  +eval(script)$
+  +setData(path, value)$
+  +getData(path) Json | SemanticData$
+
+  +getPersona(options) Persona$
+}
+```
+
 ## Usage
 
 _Tip: Run the examples below by typing this in your terminal (requires [Deno](https://deno.com/) 2+):_
