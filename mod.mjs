@@ -6,17 +6,12 @@
  */
 
 // domain model
-export { IriParser, IRI, IRL, URN, iri, irl, url, urn } from './deps.mjs';
+// export { IriParser, IRI, IRL, URN, iri, irl, url, urn } from './deps.mjs';
 
 export { 
-  Id, OrgId, GroupId, UserId, PasswordId, MembershipId, PartnershipId, PartnershipMembershipId,
-  org_id, group_id, user_id, membership_id, partnership_id, partnership_membership_id,
-  bareorg_id, baregroup_id, bareuser_id, barepartnership_id,
-
+  GroupId, UserId, 
   Persona,
-
-  Role, Roleset, defaultRoleset,
-} from './lib/pulled-in/qworum-domain-model-0.15.0/mod.mjs';
+} from './deps.mjs';
 
 // runtime
 export {

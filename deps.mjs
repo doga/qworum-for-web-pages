@@ -1,4 +1,23 @@
-export { IriParser, IRI, IRL, URN, iri, irl, url, urn } from 'https://esm.sh/gh/doga/IRI@3.1.4/mod.mjs';
+export { 
+  IriParser, IRI, iri, URN, urn, IRL, irl, url, 
+
+  Id, OrgId, GroupId, UserId, PasswordId, MembershipId, PartnershipId, PartnershipMembershipId,
+  org_id, group_id, user_id, membership_id, partnership_id, partnership_membership_id,
+  bareorg_id, baregroup_id, bareuser_id, barepartnership_id,
+
+  UserIdSet, GroupIdSet,
+
+  I18nText, Language,
+
+  Org, Group, PersonalGroup, Membership, Partnership, PartnershipMembership, Password, User, UserExtras, Role, Roleset, defaultRoleset,
+
+  Vcard, IndividualVcard, GroupVcard, OrgVcard, Name, Email, Phone, Photo, Address, Types,
+
+  DataUrl, EmailUrl, PhoneUrl,
+
+  Persona,
+} from 'https://esm.sh/gh/doga/qworum-domain-model@0.31.0/mod.mjs';
+
 
 // RDF
 import rdfTerm from 'https://esm.sh/gh/rdfjs/data-model@v2.1.0';
@@ -12,4 +31,9 @@ export {N3};
 import * as dataflow from 'https://esm.sh/gh/doga/rdf-dataflow@1.1.2/mod.mjs';
 export {dataflow};
 
-export { Language } from "https://esm.sh/gh/doga/language@1.0.2/mod.mjs";
+
+// iCal
+import ICAL from 'https://esm.sh/gh/kewisch/ical.js@v2.1.0/lib/ical/module.js';
+// import ICAL from 'https://unpkg.com/ical.js/dist/ical.min.js';
+export { ICAL };
+
