@@ -16,7 +16,7 @@ export {
   DataUrl, EmailUrl, PhoneUrl,
 
   Persona,
-} from 'https://esm.sh/gh/doga/qworum-domain-model@0.31.0/mod.mjs';
+} from 'https://esm.sh/gh/doga/qworum-domain-model@0.32.0/mod.mjs';
 
 
 // RDF
