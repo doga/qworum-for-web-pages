@@ -163,7 +163,7 @@
  * }
  * ```
  * 
- * @see {@link https://qworum.net/en/developers/|Qworum developer resources}
+ * @see {@link https://qworum.net/en/developers/ | Qworum developer resources}
  */
 
 // domain model
