@@ -2,7 +2,7 @@
 
 # Qworum for web pages
 
-This is [Qworum](https://qworum.net)'s official JavaScript library for web frontends. Latest stable release: 1.7.0.
+This is [Qworum](https://qworum.net)'s official JavaScript library for web frontends. Latest stable release: 1.8.3.
 
 ## Documentation
 
@@ -14,7 +14,7 @@ The documentation for the latest version of this library is available [here](htt
 
 ## How to import this library in a web page
 
-`import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.7.0/mod.mjs";`
+`import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs";`
 
 ## Activating Qworum for a website
 
@@ -22,22 +22,6 @@ Qworum provides advanced browser capabilities through a browser extension.
 By default Qworum is actived for [local development](https://qworum.net/en/developers/#local-development) only.
 Activating Qworum for a website requires a [subscription](https://qworum.net/en/plans/).
 
-## Classes
-
-```mermaid
----
-title: Classes
----
-classDiagram
-
-class Qworum{
-  +eval(script)$
-  +setData(path, value)$
-  +getData(path) Json | SemanticData$
-
-  +getPersona(options) Persona$
-}
-```
 
 ## Usage
 
@@ -62,7 +46,7 @@ Running this code is safe.
 </details>
 
 ```javascript
-import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.7.0/mod.mjs';
+import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs';
 
 const
 Script   = QworumScript.Script.build,
@@ -99,7 +83,7 @@ Running this code is safe.
 </details>
 
 ```javascript
-import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.7.0/mod.mjs';
+import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs';
 
 const org = new SemanticData();
 
@@ -133,7 +117,7 @@ Running this code is safe.
 </details>
 
 ```javascript
-import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.7.0/mod.mjs';
+import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs';
 
 const
 Script     = QworumScript.Script.build,

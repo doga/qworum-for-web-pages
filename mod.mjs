@@ -1,14 +1,33 @@
 /**
- * A JavaScript library through which websites can access the Qworum features of web browsers.
+ * A JavaScript library that web pages should import in order to use the Qworum features of web browsers.
+ * 
+ * This library contains:
+ * 
+ * - Classes for creating Qworum scripts, such as `Json`, `SemanticData`, `Return`, `Sequence`, `Data`, `Try`, `Goto`, `Call`, `Fault`, `Script`.
+ * 
+ * - The `Qworum` class for using the browsers' Qworum features, such as executing Qworum scripts, reading and writing session data, and checking that a browser provides Qworum capabilities.
+ * 
+ * This library will only work for websites that are part of Qworum's Service Web, which requires a subscription. 
+ * 
  * @module Qworum for web pages
  * @author Doğa Armangil <d.armangil@qworum.net>
+ * @see {@link https://qworum.net/en/plans/ | Qworum Platform Plans}
  * @license  Apache-2.0 <https://www.apache.org/licenses/LICENSE-2.0>
- * @example How to run Qworum scripts. Here a website that is part of Qworum's Service Web is calling a remote Qworum service in a Qworum session.
+ * 
+ * @example Checking that Qworum is enabled in the Web browser:
  * ```javascript
- * // JavaScript code for web frontends.
+ * try{
+ *   await Qworum.checkAvailability();
+ * }catch(error){
+ *   console.error('Install the Qworum browser extension or enable it.');
+ * }
+ * ```
+ * 
+ * @example Importing this library into a web page:
+ * ```javascript
  * import {
  *   QworumScript as qs, Qworum
- * } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.2/mod.mjs';
+ * } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs';
  * 
  * const
  * // Shortcuts for building Qworum scripts.
@@ -21,8 +40,29 @@
  * Goto         = qs.Goto.build,
  * Call         = qs.Call.build,
  * Fault        = qs.Fault.build,
- * Script       = qs.Script.build,
+ * Script       = qs.Script.build;
+ * ```
+ * 
+ * @example Running a simple Qworum script:
+ * ```javascript
+ * await Qworum.eval(
+ *   Script(
+ *       Sequence(
+ *         // Call a method of the current Qworum object
+ *         Call('@', `../view-item`, { name: 'item id', value: Json(1) }),
+ *   
+ *         // Return to the current page in the current call
+ *         Goto()
+ *       ),
+ *     )
+ *   )
+ * );
+ * ```
+ * 
+ * @example Running a more complex Qworum script:
+ * ```javascript
  * // The Qworum script to be executed.
+ * const
  * pathOfQworumObject = ['@', 'a qworum object'],
  * script = Script(
  *   Try(
@@ -51,116 +91,22 @@
  *       Goto() 
  *     }
  *   )
- * 
  * );
  * 
  * // Run the Qworum script in the web page. The end-user will experience this as a redirection.
  * await Qworum.eval(script);
  * ```
- * @example How to read and write session state outside of Qworum scripts.
+ * 
+ * @example Reading/writing data from within web pages:
  * ```javascript
- * import {
- *   QworumScript as qs, Qworum, 
- * } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.2/mod.mjs';
+ * let data = await Qworum.getData(['path', 'to', 'data']);
  * 
- * const 
- * Json = qs.Json.build,
- * data = await Qworum.getData(['path', 'to', 'data']);
- * 
- * if(!data) await Qworum.setData(['path', 'to', 'data'], Json('some data'));
- * ```
- * @example How to read the persona for the current Qworum session.
- * ```javascript
- * import {
- *   Persona, GroupId, UserId, GroupIdSet, Qworum,
- *   Vcard, IndividualVcard, GroupVcard, OrgVcard, Name, Email, Phone, Photo, Address, Types
- * } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.2/mod.mjs';
- * 
- * // Read the persona.
- * const persona = await Qworum.getPersona(); // Qworum will launch a user dialog if required.
- * 
- * if(persona){
- *   console.debug(`User: ${persona.userId}`);
- *   console.debug(`User's Vcard: formattedName="${persona.userVcard.formattedName}"`);
- *   console.debug(`User roles: ${persona.userRoleIds.map(id => `${id}`).join(' ')}`);
- *   console.debug(`Group: ${persona.groupId}`);
- *   console.debug(`Group's Vcard: formattedName="${persona.groupVcard.formattedName}"`);
- *   console.debug(`Group roles: ${persona.groupRoleIds.map(id => `${id}`).join(' ')}`);
- *   // Is the group in a partnership with other groups?
- *   if(persona.partnerGroupIds){
- *     console.debug(`Partner groups: ${persona.partnerGroupIds.members.map(id => `${id}`).join(' ')}`);
- *   }
- * } else {
- *   // The persona has still not been set by the end-user. 2 options at this point:
- *   // 1. Allow the end-user to remain anonymous.
- *   // 2. Call `Qworum.getPersona()` once again.
+ * if(!data) {
+ *   data = Json('some data');
+ *   await Qworum.setData(['path', 'to', 'data'], data);
  * }
- * ```
- * @example How to create a roleset for an application or an application category. A roleset is simply a set of URLs and/or IRLs (a Qworum-specific Unicode-aware variant of URLs) that have the same web origin, but the Roleset utility class presented here only allows IRLs.
- * ```javascript
- * import {
- *   Role, Roleset, Language, I18nText, IRL, irl
- * } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.2/mod.mjs';
  * 
- * const
- * en = Language.fromCode('en'),
- * 
- * rolesetId = irl`https://site.example/id/roleset/`,
- * 
- * description = new I18nText().setText('A capability-based roleset for Qworum services. This roleset is agnostic in terms of application category. Alternatively, applications have the option of using another roleset that is specific to their software categories. To this end, applications can define their own rolesets, or use third-party rolesets that are targeting their software vertical.', en),
- * 
- * downloader = new Role({
- *   roleId      : irl`${rolesetId}downloader`,
- *   description : new I18nText().setText('The user can download from the Qworum service any data that belongs to the group.', en)
- * }),
- * 
- * uploader = new Role({
- *   roleId      : irl`${rolesetId}uploader`,
- *   parentRoleId: downloader.roleId,
- *   description : new I18nText().setText('The user can upload data that belongs to the group or the persona.', en)
- * }),
- * 
- * transferrer = new Role({
- *   roleId      : irl`${rolesetId}transferrer`,
- *   description : new I18nText().setText('The user can transfer to another group the ownership of any data that belongs to the group.', en)
- * }),
- * 
- * reader = new Role({
- *   roleId      : irl`${rolesetId}reader`,
- *   description : new I18nText().setText('The user can read group-owned data.', en)
- * }),
- * 
- * upserter = new Role({
- *   roleId      : irl`${rolesetId}upserter`,
- *   parentRoleId: reader.roleId,
- *   description : new I18nText().setText('The user can create and update and read group-owned data, but not delete the data.', en)
- * }),
- * 
- * writer = new Role({
- *   roleId      : irl`${rolesetId}writer`,
- *   parentRoleId: upserter.roleId,
- *   description : new I18nText().setText('The user can create, read, update and delete group-owned data.', en)
- * }),
- * 
- * roleset = new Roleset({
- *   rolesetId, description,
- *   roles: [downloader, uploader, transferrer, reader, upserter, writer]
- * });
- * ```
- * @example How to verify that a persona has a certain role. Role IDs can be either URLs or IRLs.
- * ```javascript
- * import {
- *   Persona, irl, Qworum
- * } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.2/mod.mjs';
- * 
- * const persona = await Qworum.getPersona();
- * if(persona){
- *   const
- *   readerRoleId = new URL('https://site.example/id/roleset/reader'),
- *   writerRoleId = irl`https://site.example/id/roleset/writer`, // implies read permissions
- *   canRead      = persona.hasRole(readerRoleId, [writerRoleId]),
- *   canWrite     = persona.hasRole(writerRoleId);
- * }
+ * data.value === "some data"; // true
  * ```
  * 
  * @see {@link https://qworum.net/en/developers/ | Qworum developer resources}
@@ -169,23 +115,23 @@
 // domain model
 // export { IriParser, IRI, IRL, URN, iri, irl, url, urn } from './deps.mjs';
 
-export { 
-  GroupId, UserId, GroupIdSet,
-  Vcard, IndividualVcard, GroupVcard, OrgVcard, Name, Email, Phone, Photo, Address, Types,
-  Persona,
-  Role, Roleset, defaultRoleset,
-} from './deps.mjs';
+// export { 
+//   GroupId, UserId, GroupIdSet,
+//   Vcard, IndividualVcard, GroupVcard, OrgVcard, Name, Email, Phone, Photo, Address, Types,
+//   Persona,
+//   Role, Roleset, defaultRoleset,
+// } from './deps.mjs';
 
 // runtime
 export {
   QworumScript, 
 
-  // Json, SemanticData, 
+  Json, SemanticData, 
 
-  // DataValue, GenericData, 
-  // Instruction, 
-  // Return, Sequence, Data, Try, Goto, Call, Script,
-  // Fault, 
+  DataValue, GenericData, 
+  Instruction, 
+  Return, Sequence, Data, Try, Goto, Call, Script,
+  Fault, 
 } from "./lib/qworum-script.mjs";
 
 export { Qworum } from "./lib/qworum.mjs";
