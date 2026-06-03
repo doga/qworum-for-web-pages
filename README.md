@@ -2,7 +2,7 @@
 
 # Qworum for web pages
 
-This is [Qworum](https://qworum.net)'s official JavaScript library for web frontends. Latest stable release: 1.8.3.
+This is [Qworum](https://qworum.net)'s official JavaScript library for web frontends. Latest stable release: 1.8.4.
 
 ## Documentation
 
@@ -14,7 +14,20 @@ The documentation for the latest version of this library is available [here](htt
 
 ## How to import this library in a web page
 
-`import { QworumScript, Qworum } from "https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs";`
+```javascript
+import {
+  // For using the browsers' Qworum features
+  Qworum,
+
+  // For creating Qworum scripts and session data
+  QworumScript, 
+
+  // For manipulating semantic RDF data in scripts and session data
+  iri, irl, url, urn, IRI, IRL, URN, 
+  rdfTermFactory
+} from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.4/mod.mjs';
+```
+
 
 ## Activating Qworum for a website
 
@@ -22,8 +35,9 @@ Qworum provides advanced browser capabilities through a browser extension.
 By default Qworum is actived for [local development](https://qworum.net/en/developers/#local-development) only.
 Activating Qworum for a website requires a [subscription](https://qworum.net/en/plans/).
 
-
 ## Usage
+
+See the [documentation for the latest version of this library](https://qworum.net/docs/qworum-for-web-pages/latest/).
 
 _Tip: Run the examples below by typing this in your terminal (requires [Deno](https://deno.com/) 2+):_
 
@@ -46,7 +60,7 @@ Running this code is safe.
 </details>
 
 ```javascript
-import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs';
+import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.4/mod.mjs';
 
 const
 Script   = QworumScript.Script.build,
@@ -83,7 +97,7 @@ Running this code is safe.
 </details>
 
 ```javascript
-import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs';
+import { SemanticData, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.4/mod.mjs';
 
 const org = new SemanticData();
 
@@ -117,7 +131,7 @@ Running this code is safe.
 </details>
 
 ```javascript
-import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.3/mod.mjs';
+import { QworumScript, Qworum } from 'https://esm.sh/gh/doga/qworum-for-web-pages@1.8.4/mod.mjs';
 
 const
 Script     = QworumScript.Script.build,
